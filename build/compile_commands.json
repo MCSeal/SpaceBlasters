@@ -1,0 +1,14 @@
+[
+{
+  "directory": "C:/langproject/build",
+  "command": "c:\\Qt\\Tools\\mingw1310_64\\bin\\g++.exe -DMINGW_HAS_SECURE_API=1 -DQT_CORE_LIB -DQT_GUI_LIB -DQT_SVG_LIB -DQT_WIDGETS_LIB -DUNICODE -DWIN32 -DWIN64 -D_ENABLE_EXTENDED_ALIGNED_STORAGE -D_UNICODE -D_WIN64 @CMakeFiles/SpaceBlasters.dir/includes_CXX.rsp -g -std=gnu++17 -o CMakeFiles\\SpaceBlasters.dir\\SpaceBlasters_autogen\\mocs_compilation.cpp.obj -c C:\\langproject\\build\\SpaceBlasters_autogen\\mocs_compilation.cpp",
+  "file": "C:/langproject/build/SpaceBlasters_autogen/mocs_compilation.cpp",
+  "output": "CMakeFiles/SpaceBlasters.dir/SpaceBlasters_autogen/mocs_compilation.cpp.obj"
+},
+{
+  "directory": "C:/langproject/build",
+  "command": "c:\\Qt\\Tools\\mingw1310_64\\bin\\g++.exe -DMINGW_HAS_SECURE_API=1 -DQT_CORE_LIB -DQT_GUI_LIB -DQT_SVG_LIB -DQT_WIDGETS_LIB -DUNICODE -DWIN32 -DWIN64 -D_ENABLE_EXTENDED_ALIGNED_STORAGE -D_UNICODE -D_WIN64 @CMakeFiles/SpaceBlasters.dir/includes_CXX.rsp -g -std=gnu++17 -o CMakeFiles\\SpaceBlasters.dir\\src\\main.cpp.obj -c C:\\langproject\\src\\main.cpp",
+  "file": "C:/langproject/src/main.cpp",
+  "output": "CMakeFiles/SpaceBlasters.dir/src/main.cpp.obj"
+}
+]

@@ -1,0 +1,5 @@
+C:/langproject/build/CMakeFiles/SpaceBlasters.dir
+C:/langproject/build/CMakeFiles/edit_cache.dir
+C:/langproject/build/CMakeFiles/rebuild_cache.dir
+C:/langproject/build/CMakeFiles/SpaceBlasters_autogen_timestamp_deps.dir
+C:/langproject/build/CMakeFiles/SpaceBlasters_autogen.dir

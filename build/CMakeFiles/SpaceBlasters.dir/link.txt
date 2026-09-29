@@ -1,0 +1,3 @@
+C:\Qt\Tools\CMake_64\bin\cmake.exe -E rm -f CMakeFiles\SpaceBlasters.dir/objects.a
+C:\Qt\Tools\mingw1310_64\bin\ar.exe qc CMakeFiles\SpaceBlasters.dir/objects.a @CMakeFiles\SpaceBlasters.dir\objects1.rsp
+c:\Qt\Tools\mingw1310_64\bin\g++.exe -g -Wl,--whole-archive CMakeFiles\SpaceBlasters.dir/objects.a -Wl,--no-whole-archive -o SpaceBlasters.exe -Wl,--out-implib,libSpaceBlasters.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\SpaceBlasters.dir\linkLibs.rsp
