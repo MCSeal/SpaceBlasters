@@ -157,6 +157,15 @@ SpaceBlasters_autogen/timestamp: \
 	C:/Qt/6.11.2/mingw_64/lib/cmake/Qt6Svg/Qt6SvgTargets.cmake \
 	C:/Qt/6.11.2/mingw_64/lib/cmake/Qt6Svg/Qt6SvgTargetsPrecheck.cmake \
 	C:/Qt/6.11.2/mingw_64/lib/cmake/Qt6Svg/Qt6SvgVersionlessAliasTargets.cmake \
+	C:/Qt/6.11.2/mingw_64/lib/cmake/Qt6SvgWidgets/Qt6SvgWidgetsAdditionalTargetInfo.cmake \
+	C:/Qt/6.11.2/mingw_64/lib/cmake/Qt6SvgWidgets/Qt6SvgWidgetsConfig.cmake \
+	C:/Qt/6.11.2/mingw_64/lib/cmake/Qt6SvgWidgets/Qt6SvgWidgetsConfigVersion.cmake \
+	C:/Qt/6.11.2/mingw_64/lib/cmake/Qt6SvgWidgets/Qt6SvgWidgetsConfigVersionImpl.cmake \
+	C:/Qt/6.11.2/mingw_64/lib/cmake/Qt6SvgWidgets/Qt6SvgWidgetsDependencies.cmake \
+	C:/Qt/6.11.2/mingw_64/lib/cmake/Qt6SvgWidgets/Qt6SvgWidgetsTargets-relwithdebinfo.cmake \
+	C:/Qt/6.11.2/mingw_64/lib/cmake/Qt6SvgWidgets/Qt6SvgWidgetsTargets.cmake \
+	C:/Qt/6.11.2/mingw_64/lib/cmake/Qt6SvgWidgets/Qt6SvgWidgetsTargetsPrecheck.cmake \
+	C:/Qt/6.11.2/mingw_64/lib/cmake/Qt6SvgWidgets/Qt6SvgWidgetsVersionlessAliasTargets.cmake \
 	C:/Qt/6.11.2/mingw_64/lib/cmake/Qt6Widgets/Qt6QModernWindowsStylePluginAdditionalTargetInfo.cmake \
 	C:/Qt/6.11.2/mingw_64/lib/cmake/Qt6Widgets/Qt6QModernWindowsStylePluginConfig.cmake \
 	C:/Qt/6.11.2/mingw_64/lib/cmake/Qt6Widgets/Qt6QModernWindowsStylePluginTargets-relwithdebinfo.cmake \

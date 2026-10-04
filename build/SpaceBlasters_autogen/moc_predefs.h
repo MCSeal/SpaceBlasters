@@ -139,6 +139,7 @@
 #define __FLT16_MAX_10_EXP__ 4
 #define __cpp_delegating_constructors 200604L
 #define __DBL_MAX__ double(1.79769313486231570814527423731704357e+308L)
+#define QT_SVGWIDGETS_LIB 1
 #define _thiscall __attribute__((__thiscall__))
 #define __cpp_raw_strings 200710L
 #define __INT_FAST32_MAX__ 0x7fffffff

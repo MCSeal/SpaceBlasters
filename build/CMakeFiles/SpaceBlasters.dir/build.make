@@ -115,6 +115,7 @@ SpaceBlasters_EXTERNAL_OBJECTS =
 SpaceBlasters.exe: CMakeFiles/SpaceBlasters.dir/SpaceBlasters_autogen/mocs_compilation.cpp.obj
 SpaceBlasters.exe: CMakeFiles/SpaceBlasters.dir/src/main.cpp.obj
 SpaceBlasters.exe: CMakeFiles/SpaceBlasters.dir/build.make
+SpaceBlasters.exe: C:/Qt/6.11.2/mingw_64/lib/libQt6SvgWidgets.a
 SpaceBlasters.exe: C:/Qt/6.11.2/mingw_64/lib/libQt6Widgets.a
 SpaceBlasters.exe: C:/Qt/6.11.2/mingw_64/lib/libQt6Svg.a
 SpaceBlasters.exe: C:/Qt/6.11.2/mingw_64/lib/libQt6Gui.a

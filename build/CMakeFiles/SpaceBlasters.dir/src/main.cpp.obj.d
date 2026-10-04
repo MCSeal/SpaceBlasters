@@ -405,4 +405,12 @@ CMakeFiles/SpaceBlasters.dir/src/main.cpp.obj: \
  C:/Qt/6.11.2/mingw_64/include/QtGui/qkeysequence.h \
  C:/Qt/6.11.2/mingw_64/include/QtGui/qicon.h \
  C:/Qt/6.11.2/mingw_64/include/QtGui/qpalette.h \
- C:/Qt/6.11.2/mingw_64/include/QtWidgets/qsizepolicy.h
+ C:/Qt/6.11.2/mingw_64/include/QtWidgets/qsizepolicy.h \
+ C:/Qt/6.11.2/mingw_64/include/QtSvgWidgets/QGraphicsSvgItem \
+ C:/Qt/6.11.2/mingw_64/include/QtSvgWidgets/qgraphicssvgitem.h \
+ C:/Qt/6.11.2/mingw_64/include/QtSvgWidgets/qtsvgwidgetsglobal.h \
+ C:/Qt/6.11.2/mingw_64/include/QtSvgWidgets/qtsvgwidgetsexports.h \
+ C:/Qt/6.11.2/mingw_64/include/QtSvg/qtsvgglobal.h \
+ C:/Qt/6.11.2/mingw_64/include/QtSvg/qtsvgexports.h \
+ C:/Qt/6.11.2/mingw_64/include/QtWidgets/qgraphicsitem.h \
+ C:/Qt/6.11.2/mingw_64/include/QtGui/qpainterpath.h
