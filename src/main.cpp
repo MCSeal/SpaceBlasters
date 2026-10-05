@@ -13,6 +13,10 @@ int main(int argc, char *argv[]) {
     player->setPos(390, 500);
     scene.addItem(player);
 
+    auto *planet = new QGraphicsSvgItem("assets/planet-template.svg");
+    planet->setPos(650, 60);
+    scene.addItem(planet);
+
     QGraphicsView view(&scene);
     view.setWindowTitle("Space Blasters");
     view.setFixedSize(820, 640);
