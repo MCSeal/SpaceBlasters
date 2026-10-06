@@ -79,8 +79,8 @@ clean: CMakeFiles/SpaceBlasters_autogen.dir/clean
 # Target rules for target CMakeFiles/SpaceBlasters.dir
 
 # All Build rule for target.
-CMakeFiles/SpaceBlasters.dir/all: CMakeFiles/SpaceBlasters_autogen_timestamp_deps.dir/all
 CMakeFiles/SpaceBlasters.dir/all: CMakeFiles/SpaceBlasters_autogen.dir/all
+CMakeFiles/SpaceBlasters.dir/all: CMakeFiles/SpaceBlasters_autogen_timestamp_deps.dir/all
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\SpaceBlasters.dir\build.make CMakeFiles/SpaceBlasters.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\SpaceBlasters.dir\build.make CMakeFiles/SpaceBlasters.dir/build
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=C:\langproject\build\CMakeFiles --progress-num=1,2,3,4 "Built target SpaceBlasters"
