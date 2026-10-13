@@ -414,6 +414,7 @@ CMakeFiles/SpaceBlasters.dir/src/main.cpp.obj: \
  C:/Qt/6.11.2/mingw_64/include/QtSvg/qtsvgexports.h \
  C:/Qt/6.11.2/mingw_64/include/QtWidgets/qgraphicsitem.h \
  C:/Qt/6.11.2/mingw_64/include/QtGui/qpainterpath.h \
+ C:/Qt/6.11.2/mingw_64/include/QtWidgets/QGraphicsSimpleTextItem \
  C:/Qt/6.11.2/mingw_64/include/QtGui/QKeyEvent \
  C:/Qt/6.11.2/mingw_64/include/QtGui/qevent.h \
  C:/Qt/6.11.2/mingw_64/include/QtCore/qiodevice.h \
