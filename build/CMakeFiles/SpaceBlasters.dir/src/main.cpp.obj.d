@@ -413,4 +413,23 @@ CMakeFiles/SpaceBlasters.dir/src/main.cpp.obj: \
  C:/Qt/6.11.2/mingw_64/include/QtSvg/qtsvgglobal.h \
  C:/Qt/6.11.2/mingw_64/include/QtSvg/qtsvgexports.h \
  C:/Qt/6.11.2/mingw_64/include/QtWidgets/qgraphicsitem.h \
- C:/Qt/6.11.2/mingw_64/include/QtGui/qpainterpath.h
+ C:/Qt/6.11.2/mingw_64/include/QtGui/qpainterpath.h \
+ C:/Qt/6.11.2/mingw_64/include/QtGui/QKeyEvent \
+ C:/Qt/6.11.2/mingw_64/include/QtGui/qevent.h \
+ C:/Qt/6.11.2/mingw_64/include/QtCore/qiodevice.h \
+ C:/Qt/6.11.2/mingw_64/include/QtCore/qurl.h \
+ C:/Qt/6.11.2/mingw_64/include/QtGui/qeventpoint.h \
+ C:/Qt/6.11.2/mingw_64/include/QtGui/qvector2d.h \
+ C:/Qt/6.11.2/mingw_64/include/QtGui/qvectornd.h \
+ C:/Qt/6.11.2/mingw_64/include/QtGui/qpointingdevice.h \
+ C:/Qt/6.11.2/mingw_64/include/QtGui/qinputdevice.h \
+ C:/Qt/6.11.2/mingw_64/include/QtGui/qscreen.h \
+ C:/Qt/6.11.2/mingw_64/include/QtCore/QList \
+ C:/Qt/6.11.2/mingw_64/include/QtCore/QObject \
+ C:/Qt/6.11.2/mingw_64/include/QtCore/QRect \
+ C:/Qt/6.11.2/mingw_64/include/QtCore/QSize \
+ C:/Qt/6.11.2/mingw_64/include/QtCore/QSizeF \
+ C:/Qt/6.11.2/mingw_64/include/QtGui/QTransform \
+ C:/Qt/6.11.2/mingw_64/include/QtGui/qscreen_platform.h \
+ C:/Qt/6.11.2/mingw_64/include/QtCore/QTimer \
+ C:/Qt/6.11.2/mingw_64/include/QtCore/qtimer.h
