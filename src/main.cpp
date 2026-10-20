@@ -54,6 +54,7 @@ private:
             cooldown = 20; // about a third of a second
         }
         moveBullets();
+        moveEnemies();
         checkHits();
     }
 
@@ -92,6 +93,23 @@ private:
             } else {
                 ++i;
             }
+        }
+    }
+
+    // whole formation slides sideways, drops down when any enemy hits a wall
+    void moveEnemies() {
+        qreal step = enemyDir * enemySpeed;
+        bool atEdge = false;
+        // look ahead first so nothing ever ends up past the wall
+        for (auto *e : enemies) {
+            QRectF r = hitbox(e, 0.18, 0.15);
+            if (r.left() + step < 0 || r.right() + step > 800) atEdge = true;
+        }
+        if (atEdge) {
+            enemyDir = -enemyDir;
+            for (auto *e : enemies) e->setY(e->y() + 20);
+        } else {
+            for (auto *e : enemies) e->setX(e->x() + step);
         }
     }
 
@@ -139,6 +157,9 @@ private:
     std::set<int> held;
     int cooldown = 0;
     int score = 0;
+    // 1 = right, -1 = left. speed is pixels per tick
+    int enemyDir = 1;
+    qreal enemySpeed = 1;
 };
 
 int main(int argc, char *argv[]) {
@@ -152,7 +173,7 @@ int main(int argc, char *argv[]) {
     addSprite(scene, "assets/planet-template.svg", 650, 60, 0.34375);
     auto *player = addSprite(scene, "assets/player-ship-template.svg", 360, 480, 0.25);
 
-    // 2 rows of 5 enemies, not moving yet. keeping pointers so we can hit them later
+    // 2 rows of 5 enemies. keeping pointers so we can hit and move them
     std::vector<QGraphicsSvgItem*> enemies;
     for (int row = 0; row < 2; ++row) {
         for (int col = 0; col < 5; ++col) {
