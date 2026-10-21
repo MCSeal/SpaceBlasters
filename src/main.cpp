@@ -28,6 +28,12 @@ public:
 
         : QGraphicsView(scene), player(player),
           enemies(std::move(enemies)), scoreText(scoreText) {
+        // lives text top right, made here since only the view touches it
+        livesText = scene->addSimpleText("LIVES: 3");
+        livesText->setFont(QFont("Consolas", 16));
+        livesText->setBrush(QColor("#5DCAA5"));
+        livesText->setPos(660, 10);
+
         // tick() runs every time the timer goes off
         connect(&timer, &QTimer::timeout, this, [this] { tick(); });
         timer.start(16);
@@ -56,6 +62,10 @@ private:
         moveBullets();
         moveEnemies();
         checkHits();
+        checkPlayerHit();
+        // game over might have just happened, dont also show the win
+        if (over) return;
+        if (enemies.empty()) endGame("YOU WIN");
     }
 
     //movement for player
@@ -134,6 +144,40 @@ private:
         }
     }
 
+    // enemy touching the ship or slipping past the bottom costs a life.
+    // the enemy gets removed so one enemy cant drain every life at once
+    void checkPlayerHit() {
+        QRectF pr = hitbox(player, 0.2, 0.35);
+        for (size_t i = 0; i < enemies.size();) {
+            bool touched = pr.intersects(hitbox(enemies[i], 0.18, 0.15));
+            bool escaped = enemies[i]->y() > 600;
+            if (touched || escaped) {
+                removeSprite(enemies[i]);
+                enemies.erase(enemies.begin() + i);
+                loseLife();
+                if (over) return;
+            } else {
+                ++i;
+            }
+        }
+    }
+
+    void loseLife() {
+        --lives;
+        livesText->setText(QString("LIVES: %1").arg(lives));
+        if (lives <= 0) endGame("GAME OVER");
+    }
+
+    // big text in the middle, then stop the timer so everything freezes
+    void endGame(const QString &message) {
+        over = true;
+        timer.stop();
+        auto *t = scene()->addSimpleText(message);
+        t->setFont(QFont("Consolas", 48));
+        t->setBrush(QColor("#5DCAA5"));
+        t->setPos(400 - t->boundingRect().width() / 2, 240);
+    }
+
     // svgs are 320x320 with empty space around the art, so shrink the box
     // to roughly the visible part. numbers are guesses, tweak if hits feel off
     static QRectF hitbox(const QGraphicsSvgItem *item, qreal fx, qreal fy) {
@@ -151,12 +195,15 @@ private:
     QGraphicsSvgItem *player;
     std::vector<QGraphicsSvgItem*> enemies;
     QGraphicsSimpleTextItem *scoreText;
+    QGraphicsSimpleTextItem *livesText = nullptr;
     std::vector<QGraphicsSvgItem*> bullets;
     QTimer timer;
     // keys currently held down, checked every tick
     std::set<int> held;
     int cooldown = 0;
     int score = 0;
+    int lives = 3;
+    bool over = false;
     // 1 = right, -1 = left. speed is pixels per tick
     int enemyDir = 1;
     qreal enemySpeed = 1;
