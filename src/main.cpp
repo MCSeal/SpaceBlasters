@@ -7,7 +7,6 @@
 #include <QTimer>
 #include <set>
 #include <vector>
-#include <utility>
 
 // loads an svg, scales it, puts it on the scene. used for everything for now
 static QGraphicsSvgItem* addSprite(QGraphicsScene &scene, const QString &file,
@@ -23,16 +22,16 @@ class GameView : public QGraphicsView {
 public:
     //qtimer every 16ms which translates to 60fps
     GameView(QGraphicsScene *scene, QGraphicsSvgItem *player,
-             std::vector<QGraphicsSvgItem*> enemies,
              QGraphicsSimpleTextItem *scoreText)
 
-        : QGraphicsView(scene), player(player),
-          enemies(std::move(enemies)), scoreText(scoreText) {
+        : QGraphicsView(scene), player(player), scoreText(scoreText) {
         // lives text top right, made here since only the view touches it
         livesText = scene->addSimpleText("LIVES: 3");
         livesText->setFont(QFont("Consolas", 16));
         livesText->setBrush(QColor("#5DCAA5"));
         livesText->setPos(660, 10);
+
+        spawnEnemies();
 
         // tick() runs every time the timer goes off
         connect(&timer, &QTimer::timeout, this, [this] { tick(); });
@@ -43,7 +42,13 @@ public:
 protected:
     // autorepeat check so holding a key doesnt spam events
     void keyPressEvent(QKeyEvent *e) override {
-        if (!e->isAutoRepeat()) held.insert(e->key());
+        if (e->isAutoRepeat()) return;
+        // r only does anything once the game has ended
+        if (e->key() == Qt::Key_R && over) {
+            restart();
+            return;
+        }
+        held.insert(e->key());
     }
     void keyReleaseEvent(QKeyEvent *e) override {
         if (!e->isAutoRepeat()) held.erase(e->key());
@@ -66,6 +71,16 @@ private:
         // game over might have just happened, dont also show the win
         if (over) return;
         if (enemies.empty()) endGame("YOU WIN");
+    }
+
+    // 2 rows of 5, called at start and again on restart
+    void spawnEnemies() {
+        for (int row = 0; row < 2; ++row) {
+            for (int col = 0; col < 5; ++col) {
+                enemies.push_back(addSprite(*scene(), "assets/enemy-template.svg",
+                                            100 + col * 70, 120 + row * 90, 0.1875));
+            }
+        }
     }
 
     //movement for player
@@ -123,6 +138,11 @@ private:
         }
     }
 
+    // fewer enemies left = faster. 1 px/tick at full, about 2.4 for the last one
+    void updateEnemySpeed() {
+        enemySpeed = baseSpeed + (totalEnemies - (int)enemies.size()) * 0.15;
+    }
+
     // checks every bullet against every enemy, fine for 10 enemies
     void checkHits() {
         for (size_t b = 0; b < bullets.size();) {
@@ -136,6 +156,7 @@ private:
                     bullets.erase(bullets.begin() + b);
                     score += 10;
                     scoreText->setText(QString("SCORE: %1").arg(score));
+                    updateEnemySpeed();
                     hit = true;
                     break;
                 }
@@ -154,6 +175,7 @@ private:
             if (touched || escaped) {
                 removeSprite(enemies[i]);
                 enemies.erase(enemies.begin() + i);
+                updateEnemySpeed();
                 loseLife();
                 if (over) return;
             } else {
@@ -172,10 +194,44 @@ private:
     void endGame(const QString &message) {
         over = true;
         timer.stop();
-        auto *t = scene()->addSimpleText(message);
-        t->setFont(QFont("Consolas", 48));
-        t->setBrush(QColor("#5DCAA5"));
-        t->setPos(400 - t->boundingRect().width() / 2, 240);
+        endText = scene()->addSimpleText(message);
+        endText->setFont(QFont("Consolas", 48));
+        endText->setBrush(QColor("#5DCAA5"));
+        endText->setPos(400 - endText->boundingRect().width() / 2, 240);
+        hintText = scene()->addSimpleText("press R to restart");
+        hintText->setFont(QFont("Consolas", 16));
+        hintText->setBrush(QColor("#5DCAA5"));
+        hintText->setPos(400 - hintText->boundingRect().width() / 2, 320);
+    }
+
+    // wipe everything back to the starting state and start the timer again
+    void restart() {
+        for (auto *b : bullets) removeSprite(b);
+        bullets.clear();
+        for (auto *e : enemies) removeSprite(e);
+        enemies.clear();
+        // end screen text is its own items, remove those too
+        scene()->removeItem(endText);
+        delete endText;
+        endText = nullptr;
+        scene()->removeItem(hintText);
+        delete hintText;
+        hintText = nullptr;
+
+        score = 0;
+        lives = 3;
+        cooldown = 0;
+        enemyDir = 1;
+        enemySpeed = baseSpeed;
+        over = false;
+        scoreText->setText("SCORE: 0");
+        livesText->setText("LIVES: 3");
+        player->setX(360);
+        // dont carry over keys that were held when the game ended
+        held.clear();
+
+        spawnEnemies();
+        timer.start(16);
     }
 
     // svgs are 320x320 with empty space around the art, so shrink the box
@@ -196,49 +252,8 @@ private:
     std::vector<QGraphicsSvgItem*> enemies;
     QGraphicsSimpleTextItem *scoreText;
     QGraphicsSimpleTextItem *livesText = nullptr;
+    QGraphicsSimpleTextItem *endText = nullptr;
+    QGraphicsSimpleTextItem *hintText = nullptr;
     std::vector<QGraphicsSvgItem*> bullets;
     QTimer timer;
-    // keys currently held down, checked every tick
-    std::set<int> held;
-    int cooldown = 0;
-    int score = 0;
-    int lives = 3;
-    bool over = false;
-    // 1 = right, -1 = left. speed is pixels per tick
-    int enemyDir = 1;
-    qreal enemySpeed = 1;
-};
-
-int main(int argc, char *argv[]) {
-    QApplication app(argc, argv);
-
-    // scene is the game world, view is the window looking at it
-    QGraphicsScene scene(0, 0, 800, 600);
-    scene.setBackgroundBrush(Qt::black);
-
-    // scales are just what looked right against the 320x320 svgs
-    addSprite(scene, "assets/planet-template.svg", 650, 60, 0.34375);
-    auto *player = addSprite(scene, "assets/player-ship-template.svg", 360, 480, 0.25);
-
-    // 2 rows of 5 enemies. keeping pointers so we can hit and move them
-    std::vector<QGraphicsSvgItem*> enemies;
-    for (int row = 0; row < 2; ++row) {
-        for (int col = 0; col < 5; ++col) {
-            enemies.push_back(addSprite(scene, "assets/enemy-template.svg",
-                                        100 + col * 70, 120 + row * 90, 0.1875));
-        }
-    }
-
-    // score text in the top left
-    auto *scoreText = scene.addSimpleText("SCORE: 0");
-    scoreText->setFont(QFont("Consolas", 16));
-    scoreText->setBrush(QColor("#5DCAA5"));
-    scoreText->setPos(20, 10);
-
-    GameView view(&scene, player, std::move(enemies), scoreText);
-    view.setWindowTitle("Space Blasters");
-    view.setFixedSize(820, 640);
-    view.show();
-
-    return app.exec();
-}
+    // keys currently held
