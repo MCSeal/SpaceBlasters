@@ -31,6 +31,14 @@ public:
         livesText->setBrush(QColor("#5DCAA5"));
         livesText->setPos(660, 10);
 
+        // 3 planets across the top, dim until captured
+        for (int i = 0; i < 3; ++i) {
+            auto *p = addSprite(*scene, "assets/planet-template.svg",
+                                320 + i * 60, 0, 0.15);
+            p->setOpacity(dimOpacity);
+            planets.push_back(p);
+        }
+
         spawnEnemies();
 
         // tick() runs every time the timer goes off
@@ -68,12 +76,12 @@ private:
         moveEnemies();
         checkHits();
         checkPlayerHit();
-        // game over might have just happened, dont also show the win
+        // game over might have just happened, dont also count a capture
         if (over) return;
-        if (enemies.empty()) endGame("YOU WIN");
+        if (enemies.empty()) capturePlanet();
     }
 
-    // 2 rows of 5, called at start and again on restart
+    // 2 rows of 5, called at start, on restart and for every new wave
     void spawnEnemies() {
         for (int row = 0; row < 2; ++row) {
             for (int col = 0; col < 5; ++col) {
@@ -81,6 +89,24 @@ private:
                                             100 + col * 70, 120 + row * 90, 0.1875));
             }
         }
+    }
+
+    // wave cleared = next planet lights up. all 3 = win, otherwise harder wave
+    void capturePlanet() {
+        planets[captured]->setOpacity(1.0);
+        ++captured;
+        if (captured == (int)planets.size()) {
+            endGame("YOU WIN");
+            return;
+        }
+        // each wave starts a bit faster than the last
+        baseSpeed += 0.3;
+        enemySpeed = baseSpeed;
+        enemyDir = 1;
+        // leftover bullets from the last wave would clip the new enemies
+        for (auto *b : bullets) removeSprite(b);
+        bullets.clear();
+        spawnEnemies();
     }
 
     //movement for player
@@ -138,7 +164,7 @@ private:
         }
     }
 
-    // fewer enemies left = faster. 1 px/tick at full, about 2.4 for the last one
+    // fewer enemies left = faster. starts at baseSpeed, +0.15 per enemy gone
     void updateEnemySpeed() {
         enemySpeed = baseSpeed + (totalEnemies - (int)enemies.size()) * 0.15;
     }
@@ -218,6 +244,11 @@ private:
         delete hintText;
         hintText = nullptr;
 
+        // planets go back to dim, waves back to the first one
+        for (auto *p : planets) p->setOpacity(dimOpacity);
+        captured = 0;
+        baseSpeed = 1;
+
         score = 0;
         lives = 3;
         cooldown = 0;
@@ -255,5 +286,44 @@ private:
     QGraphicsSimpleTextItem *endText = nullptr;
     QGraphicsSimpleTextItem *hintText = nullptr;
     std::vector<QGraphicsSvgItem*> bullets;
+    std::vector<QGraphicsSvgItem*> planets;
     QTimer timer;
-    // keys currently held
+    // keys currently held down, checked every tick
+    std::set<int> held;
+    int cooldown = 0;
+    int score = 0;
+    int lives = 3;
+    bool over = false;
+    // how many planets are captured so far, also which wave were on
+    int captured = 0;
+    const qreal dimOpacity = 0.25;
+    // 1 = right, -1 = left. speed is pixels per tick
+    int enemyDir = 1;
+    qreal baseSpeed = 1;
+    qreal enemySpeed = 1;
+    const int totalEnemies = 10;
+};
+
+int main(int argc, char *argv[]) {
+    QApplication app(argc, argv);
+
+    // scene is the game world, view is the window looking at it
+    QGraphicsScene scene(0, 0, 800, 600);
+    scene.setBackgroundBrush(Qt::black);
+
+    // scales are just what looked right against the 320x320 svgs
+    auto *player = addSprite(scene, "assets/player-ship-template.svg", 360, 480, 0.25);
+
+    // score text in the top left
+    auto *scoreText = scene.addSimpleText("SCORE: 0");
+    scoreText->setFont(QFont("Consolas", 16));
+    scoreText->setBrush(QColor("#5DCAA5"));
+    scoreText->setPos(20, 10);
+
+    GameView view(&scene, player, scoreText);
+    view.setWindowTitle("Space Blasters");
+    view.setFixedSize(820, 640);
+    view.show();
+
+    return app.exec();
+}
