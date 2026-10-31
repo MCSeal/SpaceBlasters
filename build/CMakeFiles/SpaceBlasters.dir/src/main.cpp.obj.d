@@ -389,7 +389,7 @@ CMakeFiles/SpaceBlasters.dir/src/main.cpp.obj: \
  C:/Qt/6.11.2/mingw_64/include/QtGui/qbrush.h \
  C:/Qt/6.11.2/mingw_64/include/QtGui/qfont.h \
  C:/Qt/6.11.2/mingw_64/include/QtCore/qendian.h \
- C:/Qt/6.11.2/mingw_64/include/QtGui/qpen.h \
+ C:/Qt/6.11.2/mingw_64/include/QtGui/qpen.h C:\langproject\src\GameView.h \
  C:/Qt/6.11.2/mingw_64/include/QtWidgets/QGraphicsView \
  C:/Qt/6.11.2/mingw_64/include/QtWidgets/qgraphicsview.h \
  C:/Qt/6.11.2/mingw_64/include/QtGui/qpainter.h \
@@ -406,15 +406,9 @@ CMakeFiles/SpaceBlasters.dir/src/main.cpp.obj: \
  C:/Qt/6.11.2/mingw_64/include/QtGui/qicon.h \
  C:/Qt/6.11.2/mingw_64/include/QtGui/qpalette.h \
  C:/Qt/6.11.2/mingw_64/include/QtWidgets/qsizepolicy.h \
- C:/Qt/6.11.2/mingw_64/include/QtSvgWidgets/QGraphicsSvgItem \
- C:/Qt/6.11.2/mingw_64/include/QtSvgWidgets/qgraphicssvgitem.h \
- C:/Qt/6.11.2/mingw_64/include/QtSvgWidgets/qtsvgwidgetsglobal.h \
- C:/Qt/6.11.2/mingw_64/include/QtSvgWidgets/qtsvgwidgetsexports.h \
- C:/Qt/6.11.2/mingw_64/include/QtSvg/qtsvgglobal.h \
- C:/Qt/6.11.2/mingw_64/include/QtSvg/qtsvgexports.h \
+ C:/Qt/6.11.2/mingw_64/include/QtWidgets/QGraphicsSimpleTextItem \
  C:/Qt/6.11.2/mingw_64/include/QtWidgets/qgraphicsitem.h \
  C:/Qt/6.11.2/mingw_64/include/QtGui/qpainterpath.h \
- C:/Qt/6.11.2/mingw_64/include/QtWidgets/QGraphicsSimpleTextItem \
  C:/Qt/6.11.2/mingw_64/include/QtGui/QKeyEvent \
  C:/Qt/6.11.2/mingw_64/include/QtGui/qevent.h \
  C:/Qt/6.11.2/mingw_64/include/QtCore/qiodevice.h \
@@ -433,4 +427,13 @@ CMakeFiles/SpaceBlasters.dir/src/main.cpp.obj: \
  C:/Qt/6.11.2/mingw_64/include/QtGui/QTransform \
  C:/Qt/6.11.2/mingw_64/include/QtGui/qscreen_platform.h \
  C:/Qt/6.11.2/mingw_64/include/QtCore/QTimer \
- C:/Qt/6.11.2/mingw_64/include/QtCore/qtimer.h
+ C:/Qt/6.11.2/mingw_64/include/QtCore/qtimer.h \
+ C:\langproject\src\Player.h C:\langproject\src\Entity.h \
+ C:/Qt/6.11.2/mingw_64/include/QtSvgWidgets/QGraphicsSvgItem \
+ C:/Qt/6.11.2/mingw_64/include/QtSvgWidgets/qgraphicssvgitem.h \
+ C:/Qt/6.11.2/mingw_64/include/QtSvgWidgets/qtsvgwidgetsglobal.h \
+ C:/Qt/6.11.2/mingw_64/include/QtSvgWidgets/qtsvgwidgetsexports.h \
+ C:/Qt/6.11.2/mingw_64/include/QtSvg/qtsvgglobal.h \
+ C:/Qt/6.11.2/mingw_64/include/QtSvg/qtsvgexports.h \
+ C:\langproject\src\Bullet.h C:\langproject\src\Enemy.h \
+ C:\langproject\src\Planet.h

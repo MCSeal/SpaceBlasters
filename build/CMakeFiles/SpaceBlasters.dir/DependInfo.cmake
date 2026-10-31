@@ -10,6 +10,10 @@ set(CMAKE_DEPENDS_LANGUAGES
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "" "SpaceBlasters_autogen/timestamp" "custom" "SpaceBlasters_autogen/deps"
   "C:/langproject/build/SpaceBlasters_autogen/mocs_compilation.cpp" "CMakeFiles/SpaceBlasters.dir/SpaceBlasters_autogen/mocs_compilation.cpp.obj" "gcc" "CMakeFiles/SpaceBlasters.dir/SpaceBlasters_autogen/mocs_compilation.cpp.obj.d"
+  "C:/langproject/src/Entity.cpp" "CMakeFiles/SpaceBlasters.dir/src/Entity.cpp.obj" "gcc" "CMakeFiles/SpaceBlasters.dir/src/Entity.cpp.obj.d"
+  "C:/langproject/src/GameView.cpp" "CMakeFiles/SpaceBlasters.dir/src/GameView.cpp.obj" "gcc" "CMakeFiles/SpaceBlasters.dir/src/GameView.cpp.obj.d"
+  "C:/langproject/src/Planet.cpp" "CMakeFiles/SpaceBlasters.dir/src/Planet.cpp.obj" "gcc" "CMakeFiles/SpaceBlasters.dir/src/Planet.cpp.obj.d"
+  "C:/langproject/src/Player.cpp" "CMakeFiles/SpaceBlasters.dir/src/Player.cpp.obj" "gcc" "CMakeFiles/SpaceBlasters.dir/src/Player.cpp.obj.d"
   "C:/langproject/src/main.cpp" "CMakeFiles/SpaceBlasters.dir/src/main.cpp.obj" "gcc" "CMakeFiles/SpaceBlasters.dir/src/main.cpp.obj.d"
   )
 

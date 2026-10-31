@@ -10,5 +10,29 @@
   "command": "c:\\Qt\\Tools\\mingw1310_64\\bin\\g++.exe -DMINGW_HAS_SECURE_API=1 -DQT_CORE_LIB -DQT_GUI_LIB -DQT_SVGWIDGETS_LIB -DQT_SVG_LIB -DQT_WIDGETS_LIB -DUNICODE -DWIN32 -DWIN64 -D_ENABLE_EXTENDED_ALIGNED_STORAGE -D_UNICODE -D_WIN64 @CMakeFiles/SpaceBlasters.dir/includes_CXX.rsp -g -std=gnu++17 -o CMakeFiles\\SpaceBlasters.dir\\src\\main.cpp.obj -c C:\\langproject\\src\\main.cpp",
   "file": "C:/langproject/src/main.cpp",
   "output": "CMakeFiles/SpaceBlasters.dir/src/main.cpp.obj"
+},
+{
+  "directory": "C:/langproject/build",
+  "command": "c:\\Qt\\Tools\\mingw1310_64\\bin\\g++.exe -DMINGW_HAS_SECURE_API=1 -DQT_CORE_LIB -DQT_GUI_LIB -DQT_SVGWIDGETS_LIB -DQT_SVG_LIB -DQT_WIDGETS_LIB -DUNICODE -DWIN32 -DWIN64 -D_ENABLE_EXTENDED_ALIGNED_STORAGE -D_UNICODE -D_WIN64 @CMakeFiles/SpaceBlasters.dir/includes_CXX.rsp -g -std=gnu++17 -o CMakeFiles\\SpaceBlasters.dir\\src\\Entity.cpp.obj -c C:\\langproject\\src\\Entity.cpp",
+  "file": "C:/langproject/src/Entity.cpp",
+  "output": "CMakeFiles/SpaceBlasters.dir/src/Entity.cpp.obj"
+},
+{
+  "directory": "C:/langproject/build",
+  "command": "c:\\Qt\\Tools\\mingw1310_64\\bin\\g++.exe -DMINGW_HAS_SECURE_API=1 -DQT_CORE_LIB -DQT_GUI_LIB -DQT_SVGWIDGETS_LIB -DQT_SVG_LIB -DQT_WIDGETS_LIB -DUNICODE -DWIN32 -DWIN64 -D_ENABLE_EXTENDED_ALIGNED_STORAGE -D_UNICODE -D_WIN64 @CMakeFiles/SpaceBlasters.dir/includes_CXX.rsp -g -std=gnu++17 -o CMakeFiles\\SpaceBlasters.dir\\src\\Player.cpp.obj -c C:\\langproject\\src\\Player.cpp",
+  "file": "C:/langproject/src/Player.cpp",
+  "output": "CMakeFiles/SpaceBlasters.dir/src/Player.cpp.obj"
+},
+{
+  "directory": "C:/langproject/build",
+  "command": "c:\\Qt\\Tools\\mingw1310_64\\bin\\g++.exe -DMINGW_HAS_SECURE_API=1 -DQT_CORE_LIB -DQT_GUI_LIB -DQT_SVGWIDGETS_LIB -DQT_SVG_LIB -DQT_WIDGETS_LIB -DUNICODE -DWIN32 -DWIN64 -D_ENABLE_EXTENDED_ALIGNED_STORAGE -D_UNICODE -D_WIN64 @CMakeFiles/SpaceBlasters.dir/includes_CXX.rsp -g -std=gnu++17 -o CMakeFiles\\SpaceBlasters.dir\\src\\Planet.cpp.obj -c C:\\langproject\\src\\Planet.cpp",
+  "file": "C:/langproject/src/Planet.cpp",
+  "output": "CMakeFiles/SpaceBlasters.dir/src/Planet.cpp.obj"
+},
+{
+  "directory": "C:/langproject/build",
+  "command": "c:\\Qt\\Tools\\mingw1310_64\\bin\\g++.exe -DMINGW_HAS_SECURE_API=1 -DQT_CORE_LIB -DQT_GUI_LIB -DQT_SVGWIDGETS_LIB -DQT_SVG_LIB -DQT_WIDGETS_LIB -DUNICODE -DWIN32 -DWIN64 -D_ENABLE_EXTENDED_ALIGNED_STORAGE -D_UNICODE -D_WIN64 @CMakeFiles/SpaceBlasters.dir/includes_CXX.rsp -g -std=gnu++17 -o CMakeFiles\\SpaceBlasters.dir\\src\\GameView.cpp.obj -c C:\\langproject\\src\\GameView.cpp",
+  "file": "C:/langproject/src/GameView.cpp",
+  "output": "CMakeFiles/SpaceBlasters.dir/src/GameView.cpp.obj"
 }
 ]

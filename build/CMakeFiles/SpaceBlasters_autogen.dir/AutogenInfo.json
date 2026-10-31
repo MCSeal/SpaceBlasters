@@ -305,7 +305,33 @@
 	"CROSS_CONFIG" : false,
 	"DEP_FILE" : "C:/langproject/build/SpaceBlasters_autogen/deps",
 	"DEP_FILE_RULE_NAME" : "SpaceBlasters_autogen/timestamp",
-	"HEADERS" : [],
+	"HEADERS" : 
+	[
+		[
+			"C:/langproject/src/Entity.h",
+			"Mu",
+			"UVLADIE3JM/moc_Entity.cpp",
+			null
+		],
+		[
+			"C:/langproject/src/GameView.h",
+			"Mu",
+			"UVLADIE3JM/moc_GameView.cpp",
+			null
+		],
+		[
+			"C:/langproject/src/Planet.h",
+			"Mu",
+			"UVLADIE3JM/moc_Planet.cpp",
+			null
+		],
+		[
+			"C:/langproject/src/Player.h",
+			"Mu",
+			"UVLADIE3JM/moc_Player.cpp",
+			null
+		]
+	],
 	"HEADER_EXTENSIONS" : [ "h", "hh", "h++", "hm", "hpp", "hxx", "in", "txx" ],
 	"INCLUDE_DIR" : "C:/langproject/build/SpaceBlasters_autogen/include",
 	"MOC_COMPILATION_FILE" : "C:/langproject/build/SpaceBlasters_autogen/mocs_compilation.cpp",
@@ -380,6 +406,10 @@
 	"SETTINGS_FILE" : "C:/langproject/build/CMakeFiles/SpaceBlasters_autogen.dir/AutogenUsed.txt",
 	"SOURCES" : 
 	[
+		[ "C:/langproject/src/Entity.cpp", "Mu", null ],
+		[ "C:/langproject/src/GameView.cpp", "Mu", null ],
+		[ "C:/langproject/src/Planet.cpp", "Mu", null ],
+		[ "C:/langproject/src/Player.cpp", "Mu", null ],
 		[ "C:/langproject/src/main.cpp", "Mu", null ]
 	],
 	"USE_BETTER_GRAPH" : true,

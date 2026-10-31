@@ -104,16 +104,84 @@ CMakeFiles/SpaceBlasters.dir/src/main.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/SpaceBlasters.dir/src/main.cpp.s"
 	c:\Qt\Tools\mingw1310_64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\langproject\src\main.cpp -o CMakeFiles\SpaceBlasters.dir\src\main.cpp.s
 
+CMakeFiles/SpaceBlasters.dir/src/Entity.cpp.obj: CMakeFiles/SpaceBlasters.dir/flags.make
+CMakeFiles/SpaceBlasters.dir/src/Entity.cpp.obj: CMakeFiles/SpaceBlasters.dir/includes_CXX.rsp
+CMakeFiles/SpaceBlasters.dir/src/Entity.cpp.obj: C:/langproject/src/Entity.cpp
+CMakeFiles/SpaceBlasters.dir/src/Entity.cpp.obj: CMakeFiles/SpaceBlasters.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\langproject\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/SpaceBlasters.dir/src/Entity.cpp.obj"
+	c:\Qt\Tools\mingw1310_64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/SpaceBlasters.dir/src/Entity.cpp.obj -MF CMakeFiles\SpaceBlasters.dir\src\Entity.cpp.obj.d -o CMakeFiles\SpaceBlasters.dir\src\Entity.cpp.obj -c C:\langproject\src\Entity.cpp
+
+CMakeFiles/SpaceBlasters.dir/src/Entity.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/SpaceBlasters.dir/src/Entity.cpp.i"
+	c:\Qt\Tools\mingw1310_64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\langproject\src\Entity.cpp > CMakeFiles\SpaceBlasters.dir\src\Entity.cpp.i
+
+CMakeFiles/SpaceBlasters.dir/src/Entity.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/SpaceBlasters.dir/src/Entity.cpp.s"
+	c:\Qt\Tools\mingw1310_64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\langproject\src\Entity.cpp -o CMakeFiles\SpaceBlasters.dir\src\Entity.cpp.s
+
+CMakeFiles/SpaceBlasters.dir/src/Player.cpp.obj: CMakeFiles/SpaceBlasters.dir/flags.make
+CMakeFiles/SpaceBlasters.dir/src/Player.cpp.obj: CMakeFiles/SpaceBlasters.dir/includes_CXX.rsp
+CMakeFiles/SpaceBlasters.dir/src/Player.cpp.obj: C:/langproject/src/Player.cpp
+CMakeFiles/SpaceBlasters.dir/src/Player.cpp.obj: CMakeFiles/SpaceBlasters.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\langproject\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/SpaceBlasters.dir/src/Player.cpp.obj"
+	c:\Qt\Tools\mingw1310_64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/SpaceBlasters.dir/src/Player.cpp.obj -MF CMakeFiles\SpaceBlasters.dir\src\Player.cpp.obj.d -o CMakeFiles\SpaceBlasters.dir\src\Player.cpp.obj -c C:\langproject\src\Player.cpp
+
+CMakeFiles/SpaceBlasters.dir/src/Player.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/SpaceBlasters.dir/src/Player.cpp.i"
+	c:\Qt\Tools\mingw1310_64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\langproject\src\Player.cpp > CMakeFiles\SpaceBlasters.dir\src\Player.cpp.i
+
+CMakeFiles/SpaceBlasters.dir/src/Player.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/SpaceBlasters.dir/src/Player.cpp.s"
+	c:\Qt\Tools\mingw1310_64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\langproject\src\Player.cpp -o CMakeFiles\SpaceBlasters.dir\src\Player.cpp.s
+
+CMakeFiles/SpaceBlasters.dir/src/Planet.cpp.obj: CMakeFiles/SpaceBlasters.dir/flags.make
+CMakeFiles/SpaceBlasters.dir/src/Planet.cpp.obj: CMakeFiles/SpaceBlasters.dir/includes_CXX.rsp
+CMakeFiles/SpaceBlasters.dir/src/Planet.cpp.obj: C:/langproject/src/Planet.cpp
+CMakeFiles/SpaceBlasters.dir/src/Planet.cpp.obj: CMakeFiles/SpaceBlasters.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\langproject\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/SpaceBlasters.dir/src/Planet.cpp.obj"
+	c:\Qt\Tools\mingw1310_64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/SpaceBlasters.dir/src/Planet.cpp.obj -MF CMakeFiles\SpaceBlasters.dir\src\Planet.cpp.obj.d -o CMakeFiles\SpaceBlasters.dir\src\Planet.cpp.obj -c C:\langproject\src\Planet.cpp
+
+CMakeFiles/SpaceBlasters.dir/src/Planet.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/SpaceBlasters.dir/src/Planet.cpp.i"
+	c:\Qt\Tools\mingw1310_64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\langproject\src\Planet.cpp > CMakeFiles\SpaceBlasters.dir\src\Planet.cpp.i
+
+CMakeFiles/SpaceBlasters.dir/src/Planet.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/SpaceBlasters.dir/src/Planet.cpp.s"
+	c:\Qt\Tools\mingw1310_64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\langproject\src\Planet.cpp -o CMakeFiles\SpaceBlasters.dir\src\Planet.cpp.s
+
+CMakeFiles/SpaceBlasters.dir/src/GameView.cpp.obj: CMakeFiles/SpaceBlasters.dir/flags.make
+CMakeFiles/SpaceBlasters.dir/src/GameView.cpp.obj: CMakeFiles/SpaceBlasters.dir/includes_CXX.rsp
+CMakeFiles/SpaceBlasters.dir/src/GameView.cpp.obj: C:/langproject/src/GameView.cpp
+CMakeFiles/SpaceBlasters.dir/src/GameView.cpp.obj: CMakeFiles/SpaceBlasters.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\langproject\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/SpaceBlasters.dir/src/GameView.cpp.obj"
+	c:\Qt\Tools\mingw1310_64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/SpaceBlasters.dir/src/GameView.cpp.obj -MF CMakeFiles\SpaceBlasters.dir\src\GameView.cpp.obj.d -o CMakeFiles\SpaceBlasters.dir\src\GameView.cpp.obj -c C:\langproject\src\GameView.cpp
+
+CMakeFiles/SpaceBlasters.dir/src/GameView.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/SpaceBlasters.dir/src/GameView.cpp.i"
+	c:\Qt\Tools\mingw1310_64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\langproject\src\GameView.cpp > CMakeFiles\SpaceBlasters.dir\src\GameView.cpp.i
+
+CMakeFiles/SpaceBlasters.dir/src/GameView.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/SpaceBlasters.dir/src/GameView.cpp.s"
+	c:\Qt\Tools\mingw1310_64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\langproject\src\GameView.cpp -o CMakeFiles\SpaceBlasters.dir\src\GameView.cpp.s
+
 # Object files for target SpaceBlasters
 SpaceBlasters_OBJECTS = \
 "CMakeFiles/SpaceBlasters.dir/SpaceBlasters_autogen/mocs_compilation.cpp.obj" \
-"CMakeFiles/SpaceBlasters.dir/src/main.cpp.obj"
+"CMakeFiles/SpaceBlasters.dir/src/main.cpp.obj" \
+"CMakeFiles/SpaceBlasters.dir/src/Entity.cpp.obj" \
+"CMakeFiles/SpaceBlasters.dir/src/Player.cpp.obj" \
+"CMakeFiles/SpaceBlasters.dir/src/Planet.cpp.obj" \
+"CMakeFiles/SpaceBlasters.dir/src/GameView.cpp.obj"
 
 # External object files for target SpaceBlasters
 SpaceBlasters_EXTERNAL_OBJECTS =
 
 SpaceBlasters.exe: CMakeFiles/SpaceBlasters.dir/SpaceBlasters_autogen/mocs_compilation.cpp.obj
 SpaceBlasters.exe: CMakeFiles/SpaceBlasters.dir/src/main.cpp.obj
+SpaceBlasters.exe: CMakeFiles/SpaceBlasters.dir/src/Entity.cpp.obj
+SpaceBlasters.exe: CMakeFiles/SpaceBlasters.dir/src/Player.cpp.obj
+SpaceBlasters.exe: CMakeFiles/SpaceBlasters.dir/src/Planet.cpp.obj
+SpaceBlasters.exe: CMakeFiles/SpaceBlasters.dir/src/GameView.cpp.obj
 SpaceBlasters.exe: CMakeFiles/SpaceBlasters.dir/build.make
 SpaceBlasters.exe: C:/Qt/6.11.2/mingw_64/lib/libQt6SvgWidgets.a
 SpaceBlasters.exe: C:/Qt/6.11.2/mingw_64/lib/libQt6Widgets.a
@@ -123,7 +191,7 @@ SpaceBlasters.exe: C:/Qt/6.11.2/mingw_64/lib/libQt6Core.a
 SpaceBlasters.exe: CMakeFiles/SpaceBlasters.dir/linkLibs.rsp
 SpaceBlasters.exe: CMakeFiles/SpaceBlasters.dir/objects1.rsp
 SpaceBlasters.exe: CMakeFiles/SpaceBlasters.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=C:\langproject\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Linking CXX executable SpaceBlasters.exe"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=C:\langproject\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Linking CXX executable SpaceBlasters.exe"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles\SpaceBlasters.dir\link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

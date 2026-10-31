@@ -7,6 +7,12 @@ set(CMAKE_AUTOMOC ON)
 
 find_package(Qt6 REQUIRED COMPONENTS Widgets Svg SvgWidgets)
 
-add_executable(${PROJECT_NAME} src/main.cpp)
+add_executable(${PROJECT_NAME}
+    src/main.cpp
+    src/Entity.cpp
+    src/Player.cpp
+    src/Planet.cpp
+    src/GameView.cpp
+)
 target_link_libraries(${PROJECT_NAME} Qt6::Widgets Qt6::Svg Qt6::SvgWidgets)
 file(COPY ${CMAKE_SOURCE_DIR}/assets DESTINATION ${CMAKE_BINARY_DIR})

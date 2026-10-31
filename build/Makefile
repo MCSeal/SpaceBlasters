@@ -178,6 +178,102 @@ SpaceBlasters_autogen/mocs_compilation.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\SpaceBlasters.dir\build.make CMakeFiles/SpaceBlasters.dir/SpaceBlasters_autogen/mocs_compilation.cpp.s
 .PHONY : SpaceBlasters_autogen/mocs_compilation.cpp.s
 
+src/Entity.obj: src/Entity.cpp.obj
+.PHONY : src/Entity.obj
+
+# target to build an object file
+src/Entity.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\SpaceBlasters.dir\build.make CMakeFiles/SpaceBlasters.dir/src/Entity.cpp.obj
+.PHONY : src/Entity.cpp.obj
+
+src/Entity.i: src/Entity.cpp.i
+.PHONY : src/Entity.i
+
+# target to preprocess a source file
+src/Entity.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\SpaceBlasters.dir\build.make CMakeFiles/SpaceBlasters.dir/src/Entity.cpp.i
+.PHONY : src/Entity.cpp.i
+
+src/Entity.s: src/Entity.cpp.s
+.PHONY : src/Entity.s
+
+# target to generate assembly for a file
+src/Entity.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\SpaceBlasters.dir\build.make CMakeFiles/SpaceBlasters.dir/src/Entity.cpp.s
+.PHONY : src/Entity.cpp.s
+
+src/GameView.obj: src/GameView.cpp.obj
+.PHONY : src/GameView.obj
+
+# target to build an object file
+src/GameView.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\SpaceBlasters.dir\build.make CMakeFiles/SpaceBlasters.dir/src/GameView.cpp.obj
+.PHONY : src/GameView.cpp.obj
+
+src/GameView.i: src/GameView.cpp.i
+.PHONY : src/GameView.i
+
+# target to preprocess a source file
+src/GameView.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\SpaceBlasters.dir\build.make CMakeFiles/SpaceBlasters.dir/src/GameView.cpp.i
+.PHONY : src/GameView.cpp.i
+
+src/GameView.s: src/GameView.cpp.s
+.PHONY : src/GameView.s
+
+# target to generate assembly for a file
+src/GameView.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\SpaceBlasters.dir\build.make CMakeFiles/SpaceBlasters.dir/src/GameView.cpp.s
+.PHONY : src/GameView.cpp.s
+
+src/Planet.obj: src/Planet.cpp.obj
+.PHONY : src/Planet.obj
+
+# target to build an object file
+src/Planet.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\SpaceBlasters.dir\build.make CMakeFiles/SpaceBlasters.dir/src/Planet.cpp.obj
+.PHONY : src/Planet.cpp.obj
+
+src/Planet.i: src/Planet.cpp.i
+.PHONY : src/Planet.i
+
+# target to preprocess a source file
+src/Planet.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\SpaceBlasters.dir\build.make CMakeFiles/SpaceBlasters.dir/src/Planet.cpp.i
+.PHONY : src/Planet.cpp.i
+
+src/Planet.s: src/Planet.cpp.s
+.PHONY : src/Planet.s
+
+# target to generate assembly for a file
+src/Planet.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\SpaceBlasters.dir\build.make CMakeFiles/SpaceBlasters.dir/src/Planet.cpp.s
+.PHONY : src/Planet.cpp.s
+
+src/Player.obj: src/Player.cpp.obj
+.PHONY : src/Player.obj
+
+# target to build an object file
+src/Player.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\SpaceBlasters.dir\build.make CMakeFiles/SpaceBlasters.dir/src/Player.cpp.obj
+.PHONY : src/Player.cpp.obj
+
+src/Player.i: src/Player.cpp.i
+.PHONY : src/Player.i
+
+# target to preprocess a source file
+src/Player.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\SpaceBlasters.dir\build.make CMakeFiles/SpaceBlasters.dir/src/Player.cpp.i
+.PHONY : src/Player.cpp.i
+
+src/Player.s: src/Player.cpp.s
+.PHONY : src/Player.s
+
+# target to generate assembly for a file
+src/Player.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\SpaceBlasters.dir\build.make CMakeFiles/SpaceBlasters.dir/src/Player.cpp.s
+.PHONY : src/Player.cpp.s
+
 src/main.obj: src/main.cpp.obj
 .PHONY : src/main.obj
 
@@ -216,6 +312,18 @@ help:
 	@echo ... SpaceBlasters_autogen/mocs_compilation.obj
 	@echo ... SpaceBlasters_autogen/mocs_compilation.i
 	@echo ... SpaceBlasters_autogen/mocs_compilation.s
+	@echo ... src/Entity.obj
+	@echo ... src/Entity.i
+	@echo ... src/Entity.s
+	@echo ... src/GameView.obj
+	@echo ... src/GameView.i
+	@echo ... src/GameView.s
+	@echo ... src/Planet.obj
+	@echo ... src/Planet.i
+	@echo ... src/Planet.s
+	@echo ... src/Player.obj
+	@echo ... src/Player.i
+	@echo ... src/Player.s
 	@echo ... src/main.obj
 	@echo ... src/main.i
 	@echo ... src/main.s
