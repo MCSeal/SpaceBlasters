@@ -1,4 +1,10 @@
 #include "GameView.h"
+#include "HighScore.h"
+#include <QRandomGenerator>
+
+//added shooting by enemy , have to shoot them all down before winning
+
+
 
 //qtimer every 16ms which translates to 60fps
 GameView::GameView(QGraphicsScene *scene, QGraphicsSimpleTextItem *scoreText)
@@ -49,11 +55,25 @@ void GameView::tick() {
     }
     moveBullets();
     moveEnemies();
+    enemyFire();
+    moveEnemyBullets();
+    if (over) return;
     checkHits();
     checkPlayerHit();
     // game over might have just happened, dont also count a capture
     if (over) return;
-    if (enemies.empty()) capturePlanet();
+    if (enemies.empty()) {
+        // enemies that got past or hit the ship dont count as a clear
+        if (waveKills == totalEnemies) {
+            capturePlanet();
+        } else {
+            waveKills = 0;
+            enemySpeed = baseSpeed;
+            enemyDir = 1;
+            enemyBullets.clear();
+            spawnEnemies();
+        }
+    }
 }
 
 // 2 rows of 5, called at start, on restart and for every new wave
@@ -80,6 +100,8 @@ void GameView::capturePlanet() {
     enemyDir = 1;
     // leftover bullets from the last wave would clip the new enemies
     bullets.clear();
+    enemyBullets.clear();
+    waveKills = 0;
     spawnEnemies();
 }
 
@@ -98,6 +120,36 @@ void GameView::moveBullets() {
         // gone off the top, erasing it also deletes the sprite
         if (bullets[i]->offScreen()) {
             bullets.erase(bullets.begin() + i);
+        } else {
+            ++i;
+        }
+    }
+}
+
+// a random enemy shoots every so often, later waves shoot more
+void GameView::enemyFire() {
+    if (enemies.empty()) return;
+    if (--enemyCooldown > 0) return;
+    enemyCooldown = qMax(30, 100 - captured * 25) + QRandomGenerator::global()->bounded(40);
+
+    auto &shooter = enemies[QRandomGenerator::global()->bounded((int)enemies.size())];
+    QRectF r = shooter->bounds();
+    auto b = std::make_unique<Bullet>(*scene(), 0, r.bottom() - 10, 4);
+    b->setPos(r.center().x() - b->bounds().width() / 2, r.bottom() - 10);
+    enemyBullets.push_back(std::move(b));
+}
+
+// same as moveBullets, plus a hit on the ship costs a life
+void GameView::moveEnemyBullets() {
+    QRectF pr = player->hitbox();
+    for (size_t i = 0; i < enemyBullets.size();) {
+        enemyBullets[i]->update();
+        if (enemyBullets[i]->hitbox().intersects(pr)) {
+            enemyBullets.erase(enemyBullets.begin() + i);
+            loseLife();
+            if (over) return;
+        } else if (enemyBullets[i]->offScreen()) {
+            enemyBullets.erase(enemyBullets.begin() + i);
         } else {
             ++i;
         }
@@ -136,6 +188,7 @@ void GameView::checkHits() {
                 enemies.erase(enemies.begin() + e);
                 bullets.erase(bullets.begin() + b);
                 score += 10;
+                ++waveKills;
                 scoreText->setText(QString("SCORE: %1").arg(score));
                 updateEnemySpeed();
                 hit = true;
@@ -174,11 +227,22 @@ void GameView::loseLife() {
 void GameView::endGame(const QString &message) {
     over = true;
     timer.stop();
+
+
+    
+    // grab the old best before saving so we know if this run beat it
+    int oldBest = HighScore::best();
+    HighScore::save(score, captured, message == "YOU WIN" ? "win" : "loss");
+    int best = qMax(oldBest, score);
+
     endText = scene()->addSimpleText(message);
     endText->setFont(QFont("Consolas", 48));
-    endText->setBrush(QColor("#5DCAA5"));
+    endText->setBrush(QColor("#58d1a9"));
     endText->setPos(400 - endText->boundingRect().width() / 2, 240);
-    hintText = scene()->addSimpleText("press R to restart");
+
+    QString hint = QString("best: %1   press R to restart").arg(best);
+    if (score > oldBest) hint = "new best!   press R to restart";
+    hintText = scene()->addSimpleText(hint);
     hintText->setFont(QFont("Consolas", 16));
     hintText->setBrush(QColor("#5DCAA5"));
     hintText->setPos(400 - hintText->boundingRect().width() / 2, 320);
@@ -187,7 +251,10 @@ void GameView::endGame(const QString &message) {
 // wipe everything back to the starting state and start the timer again
 void GameView::restart() {
     bullets.clear();
+    enemyBullets.clear();
     enemies.clear();
+    waveKills = 0;
+    enemyCooldown = 90;
     // end screen text is its own items, remove those too
     scene()->removeItem(endText);
     delete endText;

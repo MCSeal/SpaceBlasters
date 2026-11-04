@@ -3,15 +3,18 @@
 
 class Bullet : public Entity {
 public:
-    Bullet(QGraphicsScene &scene, qreal x, qreal y)
-        : Entity(scene, "assets/bullet-template.svg", x, y, 0.3) {
+    // speed is pixels per tick, negative = up (player), positive = down (enemy)
+    Bullet(QGraphicsScene &scene, qreal x, qreal y, qreal speed = -8)
+        : Entity(scene, "assets/bullet-template.svg", x, y, 0.3), speed(speed) {
         hitX = 0.4;
         hitY = 0.35;
     }
 
-    // straight up, 8 px per tick
-    void update() override { moveBy(0, -8); }
+    void update() override { moveBy(0, speed); }
 
-    // gone off the top, view deletes it or they pile up forever
-    bool offScreen() const { return y() < -bounds().height(); }
+    // gone off the top or bottom, view deletes it or they pile up forever
+    bool offScreen() const { return y() < -bounds().height() || y() > 600; }
+
+private:
+    qreal speed;
 };
