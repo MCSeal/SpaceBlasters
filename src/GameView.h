@@ -58,8 +58,9 @@ private:
     int enemyDir = 1;
     qreal baseSpeed = 1;
     qreal enemySpeed = 1;
-    const int totalEnemies = 10;
-    // enemies shot down this wave, a wave only captures a planet if all of them were
+    // how many enemies the current wave started with
+    int waveSize = 0;
+    // enemies shot down this wave, a wave captures a planet if at least half were
     int waveKills = 0;
     // ticks until the next enemy shot
     int enemyCooldown = 90;

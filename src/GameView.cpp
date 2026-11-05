@@ -2,7 +2,7 @@
 #include "HighScore.h"
 #include <QRandomGenerator>
 
-//added shooting by enemy , have to shoot them all down before winning
+
 
 
 
@@ -13,7 +13,7 @@ GameView::GameView(QGraphicsScene *scene, QGraphicsSimpleTextItem *scoreText)
     player = std::make_unique<Player>(*scene, held);
 
     // lives text top right, made here since only the view touches it
-    livesText = scene->addSimpleText("LIVES: 3");
+    livesText = scene->addSimpleText("LIVES: 55");
     livesText->setFont(QFont("Consolas", 16));
     livesText->setBrush(QColor("#5DCAA5"));
     livesText->setPos(660, 10);
@@ -63,8 +63,8 @@ void GameView::tick() {
     // game over might have just happened, dont also count a capture
     if (over) return;
     if (enemies.empty()) {
-        // enemies that got past or hit the ship dont count as a clear
-        if (waveKills == totalEnemies) {
+        // shooting down at least half the wave counts as a clear
+        if (waveKills * 2 >= waveSize) {
             capturePlanet();
         } else {
             waveKills = 0;
@@ -76,14 +76,30 @@ void GameView::tick() {
     }
 }
 
-// 2 rows of 5, called at start, on restart and for every new wave
+// bigger every wave: 2x5, 2x6, 3x7. later waves get random gaps and some tough enemies.
+// called at start, on restart and for every new wave
 void GameView::spawnEnemies() {
-    for (int row = 0; row < 2; ++row) {
-        for (int col = 0; col < 5; ++col) {
-            enemies.push_back(std::make_unique<Enemy>(
-                *scene(), 100 + col * 70, 120 + row * 90));
+    int rows = captured >= 2 ? 3 : 2;
+    int cols = 5 + captured;
+    // centre the block, enemies are about 60px wide with 10px between
+    qreal startX = (800 - ((cols - 1) * 70 + 60)) / 2.0;
+    auto *rng = QRandomGenerator::global();
+
+    for (int row = 0; row < rows; ++row) {
+        for (int col = 0; col < cols; ++col) {
+            // first wave is always full so it stays predictable
+            if (captured > 0 && rng->bounded(100) < 15) continue;
+            auto e = std::make_unique<Enemy>(
+                *scene(), startX + col * 70, 120 + row * 90);
+            if (captured > 0 && rng->bounded(100) < 25) e->makeTough();
+            enemies.push_back(std::move(e));
         }
     }
+    // never leave a wave empty
+    if (enemies.empty()) {
+        enemies.push_back(std::make_unique<Enemy>(*scene(), 370, 120));
+    }
+    waveSize = (int)enemies.size();
 }
 
 // wave cleared = next planet lights up. all 3 = win, otherwise harder wave
@@ -173,9 +189,9 @@ void GameView::moveEnemies() {
     }
 }
 
-// fewer enemies left = faster. starts at baseSpeed, +0.15 per enemy gone
+// fewer enemies left = faster. starts at baseSpeed, adds up to +1.5 by the last one
 void GameView::updateEnemySpeed() {
-    enemySpeed = baseSpeed + (totalEnemies - (int)enemies.size()) * 0.15;
+    enemySpeed = baseSpeed + (waveSize - (int)enemies.size()) * 1.5 / waveSize;
 }
 
 // checks every bullet against every enemy, fine for 10 enemies
@@ -185,13 +201,16 @@ void GameView::checkHits() {
         QRectF br = bullets[b]->hitbox();
         for (size_t e = 0; e < enemies.size(); ++e) {
             if (br.intersects(enemies[e]->hitbox())) {
-                enemies.erase(enemies.begin() + e);
                 bullets.erase(bullets.begin() + b);
-                score += 10;
-                ++waveKills;
-                scoreText->setText(QString("SCORE: %1").arg(score));
-                updateEnemySpeed();
                 hit = true;
+                // tough ones survive the first hit
+                if (enemies[e]->hit()) {
+                    score += enemies[e]->points;
+                    enemies.erase(enemies.begin() + e);
+                    ++waveKills;
+                    scoreText->setText(QString("SCORE: %1").arg(score));
+                    updateEnemySpeed();
+                }
                 break;
             }
         }
@@ -273,7 +292,7 @@ void GameView::restart() {
     enemySpeed = baseSpeed;
     over = false;
     scoreText->setText("SCORE: 0");
-    livesText->setText("LIVES: 3");
+    livesText->setText("LIVES: 55");
     player->reset();
     // dont carry over keys that were held when the game ended
     held.clear();
