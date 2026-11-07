@@ -19,16 +19,13 @@ public:
     void setOpacity(qreal o) { item->setOpacity(o); }
     QRectF bounds() const { return item->sceneBoundingRect(); }
 
-    // svgs are 320x320 with empty space around the art, so shrink the box
-    // to roughly the visible part. numbers are guesses, tweak if hits feel off
-    QRectF hitbox() const;
-
-protected:
-    // how much to trim off each side, set by the subclasses
-    qreal hitX = 0;
-    qreal hitY = 0;
+    // box around the part of the svg that actually has art, not the whole
+    // 320x320 square. worked out once when the svg is loaded
+    QRectF hitbox() const { return item->mapRectToScene(art); }
 
 private:
     QGraphicsScene &scene;
     QGraphicsSvgItem *item;
+    // visible art in the svgs own coordinates
+    QRectF art;
 };

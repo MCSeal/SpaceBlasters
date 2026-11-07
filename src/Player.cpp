@@ -3,10 +3,7 @@
 
 Player::Player(QGraphicsScene &scene, const std::set<int> &held)
     : Entity(scene, "assets/player-ship-template.svg", 360, 480, 0.25),
-      held(held) {
-    hitX = 0.2;
-    hitY = 0.35;
-}
+      held(held) {}
 
 //movement for player
 void Player::update() {

@@ -5,10 +5,7 @@
 class Enemy : public Entity {
 public:
     Enemy(QGraphicsScene &scene, qreal x, qreal y)
-        : Entity(scene, "assets/enemy-template.svg", x, y, 0.1875) {
-        hitX = 0.18;
-        hitY = 0.15;
-    }
+        : Entity(scene, "assets/enemy-template.svg", x, y, 0.1875) {}
 
     // some enemies take two hits, drawn dimmer until the first one lands
     void makeTough() {
