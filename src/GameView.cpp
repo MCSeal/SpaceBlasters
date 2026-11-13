@@ -13,7 +13,7 @@ GameView::GameView(QGraphicsScene *scene, QGraphicsSimpleTextItem *scoreText)
     player = std::make_unique<Player>(*scene, held);
 
     // lives text top right, made here since only the view touches it
-    livesText = scene->addSimpleText("LIVES: 55");
+    livesText = scene->addSimpleText("LIVES: 3");
     livesText->setFont(QFont("Consolas", 16));
     livesText->setBrush(QColor("#5DCAA5"));
     livesText->setPos(660, 10);
@@ -49,6 +49,7 @@ void GameView::keyReleaseEvent(QKeyEvent *e) {
 // everything that happens each frame, in order
 void GameView::tick() {
     player->update();
+    updateEffects();
     if (held.count(Qt::Key_Space) && player->ready()) {
         fire();
         player->startCooldown();
@@ -129,6 +130,18 @@ void GameView::fire() {
     bullets.push_back(std::move(b));
 }
 
+// plays every explosion one step, drops the ones that finished
+void GameView::updateEffects() {
+    for (size_t i = 0; i < effects.size();) {
+        effects[i]->update();
+        if (effects[i]->done()) {
+            effects.erase(effects.begin() + i);
+        } else {
+            ++i;
+        }
+    }
+}
+
 void GameView::moveBullets() {
     // no ++i in the loop header because erasing shifts everything down
     for (size_t i = 0; i < bullets.size();) {
@@ -205,6 +218,9 @@ void GameView::checkHits() {
                 hit = true;
                 // tough ones survive the first hit
                 if (enemies[e]->hit()) {
+                    QRectF r = enemies[e]->bounds();
+                    effects.push_back(std::make_unique<Effect>(
+                        *scene(), r.center().x(), r.center().y()));
                     score += enemies[e]->points;
                     enemies.erase(enemies.begin() + e);
                     ++waveKills;
@@ -226,6 +242,12 @@ void GameView::checkPlayerHit() {
         bool touched = pr.intersects(enemies[i]->hitbox());
         bool escaped = enemies[i]->y() > 600;
         if (touched || escaped) {
+            // only blow up if it hit the ship, not if it slipped past
+            if (touched) {
+                QRectF r = enemies[i]->bounds();
+                effects.push_back(std::make_unique<Effect>(
+                    *scene(), r.center().x(), r.center().y()));
+            }
             enemies.erase(enemies.begin() + i);
             updateEnemySpeed();
             loseLife();
@@ -246,6 +268,8 @@ void GameView::loseLife() {
 void GameView::endGame(const QString &message) {
     over = true;
     timer.stop();
+    // an explosion frozen mid frame would sit on the end screen
+    effects.clear();
 
 
     
@@ -272,6 +296,7 @@ void GameView::restart() {
     bullets.clear();
     enemyBullets.clear();
     enemies.clear();
+    effects.clear();
     waveKills = 0;
     enemyCooldown = 90;
     // end screen text is its own items, remove those too
@@ -292,7 +317,7 @@ void GameView::restart() {
     enemySpeed = baseSpeed;
     over = false;
     scoreText->setText("SCORE: 0");
-    livesText->setText("LIVES: 55");
+    livesText->setText("LIVES: 3");
     player->reset();
     // dont carry over keys that were held when the game ended
     held.clear();

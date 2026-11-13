@@ -19,6 +19,9 @@ public:
     void setOpacity(qreal o) { item->setOpacity(o); }
     QRectF bounds() const { return item->sceneBoundingRect(); }
 
+    // swap to a different svg, used for animation frames
+    void setSprite(const QString &file);
+
     // box around the part of the svg that actually has art, not the whole
     // 320x320 square. worked out once when the svg is loaded
     QRectF hitbox() const { return item->mapRectToScene(art); }

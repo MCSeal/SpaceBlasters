@@ -40,6 +40,12 @@ Entity::Entity(QGraphicsScene &scene, const QString &file,
     scene.addItem(item);
 }
 
+void Entity::setSprite(const QString &file) {
+    item->renderer()->load(file);
+    art = findArt(file);
+    item->update();
+}
+
 // take it off the scene first, then delete
 Entity::~Entity() {
     scene.removeItem(item);

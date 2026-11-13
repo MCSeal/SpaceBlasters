@@ -21,8 +21,7 @@ void Player::update() {
 }
 
 void Player::reset() {
-    // haha im cheating with 55 lives 
-    lives = 55;
+    lives = 3;
     cooldown = 0;
     setPos(360, y());
 }

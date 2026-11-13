@@ -10,6 +10,7 @@
 #include "Bullet.h"
 #include "Enemy.h"
 #include "Planet.h"
+#include "Effect.h"
 
 class GameView : public QGraphicsView {
 public:
@@ -25,6 +26,7 @@ private:
     void capturePlanet();
     void fire();
     void moveBullets();
+    void updateEffects();
     void enemyFire();
     void moveEnemyBullets();
     void moveEnemies();
@@ -48,6 +50,7 @@ private:
     std::vector<std::unique_ptr<Bullet>> bullets;
     std::vector<std::unique_ptr<Bullet>> enemyBullets;
     std::vector<std::unique_ptr<Planet>> planets;
+    std::vector<std::unique_ptr<Effect>> effects;
 
     QTimer timer;
     int score = 0;
