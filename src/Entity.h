@@ -1,6 +1,7 @@
 #pragma once
 #include <QGraphicsSvgItem>
 #include <QGraphicsScene>
+#include <QGraphicsColorizeEffect>
 
 // base for everything on screen. owns one svg item and cleans it up itself
 class Entity {
@@ -21,6 +22,13 @@ public:
 
     // swap to a different svg, used for animation frames
     void setSprite(const QString &file);
+
+    // paints the whole sprite in one colour, no new svg needed
+    void tint(const QColor &colour) {
+        auto *fx = new QGraphicsColorizeEffect;
+        fx->setColor(colour);
+        item->setGraphicsEffect(fx);
+    }
 
     // box around the part of the svg that actually has art, not the whole
     // 320x320 square. worked out once when the svg is loaded

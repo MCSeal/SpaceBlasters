@@ -435,5 +435,8 @@ CMakeFiles/SpaceBlasters.dir/src/main.cpp.obj: \
  C:/Qt/6.11.2/mingw_64/include/QtSvgWidgets/qtsvgwidgetsexports.h \
  C:/Qt/6.11.2/mingw_64/include/QtSvg/qtsvgglobal.h \
  C:/Qt/6.11.2/mingw_64/include/QtSvg/qtsvgexports.h \
+ C:/Qt/6.11.2/mingw_64/include/QtWidgets/QGraphicsColorizeEffect \
+ C:/Qt/6.11.2/mingw_64/include/QtWidgets/qgraphicseffect.h \
  C:\langproject\src\Bullet.h C:\langproject\src\Enemy.h \
- C:\langproject\src\Planet.h C:\langproject\src\Effect.h
+ C:\langproject\src\Planet.h C:\langproject\src\Effect.h \
+ C:\langproject\src\Pickup.h

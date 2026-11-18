@@ -2,7 +2,7 @@
 #include <QKeyEvent>
 
 Player::Player(QGraphicsScene &scene, const std::set<int> &held)
-    : Entity(scene, "assets/player-ship-template.svg", 360, 480, 0.25),
+    : Entity(scene, "assets/player-ship-3.svg", 360, 480, 0.25),
       held(held) {}
 
 //movement for player
@@ -20,8 +20,17 @@ void Player::update() {
     if (cooldown > 0) --cooldown;
 }
 
+// one svg per health, 1 is the most damaged and 4 only comes from a wrench
+void Player::setLives(int n) {
+    lives = n;
+    if (n >= 1 && n <= maxLives) {
+        setSprite(QString("assets/player-ship-%1.svg").arg(n));
+    }
+}
+
 void Player::reset() {
-    lives = 3;
+    setLives(3);
+    setOpacity(1.0);
     cooldown = 0;
     setPos(360, y());
 }

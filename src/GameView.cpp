@@ -48,6 +48,12 @@ void GameView::keyReleaseEvent(QKeyEvent *e) {
 
 // everything that happens each frame, in order
 void GameView::tick() {
+    // last life is gone, let the explosion play and then end the game
+    if (dying > 0) {
+        updateEffects();
+        if (--dying == 0) endGame("GAME OVER");
+        return;
+    }
     player->update();
     updateEffects();
     if (held.count(Qt::Key_Space) && player->ready()) {
@@ -58,11 +64,12 @@ void GameView::tick() {
     moveEnemies();
     enemyFire();
     moveEnemyBullets();
-    if (over) return;
+    if (stopped()) return;
     checkHits();
     checkPlayerHit();
     // game over might have just happened, dont also count a capture
-    if (over) return;
+    if (stopped()) return;
+    updatePickups();
     if (enemies.empty()) {
         // shooting down at least half the wave counts as a clear
         if (waveKills * 2 >= waveSize) {
@@ -142,6 +149,38 @@ void GameView::updateEffects() {
     }
 }
 
+// wrenches fall, one that touches the ship gives a life back (max 4).
+// a new one drops now and then, only when theres a life to get back
+void GameView::updatePickups() {
+    auto *rng = QRandomGenerator::global();
+    if (--pickupCooldown <= 0) {
+        pickupCooldown = 900 + rng->bounded(900);
+        if (player->lives < Player::maxLives && pickups.empty()) {
+            pickups.push_back(std::make_unique<Pickup>(*scene(), 20 + rng->bounded(720)));
+        }
+    }
+
+    QRectF pr = player->hitbox();
+    for (size_t i = 0; i < pickups.size();) {
+        pickups[i]->update();
+        if (pickups[i]->hitbox().intersects(pr)) {
+            pickups.erase(pickups.begin() + i);
+            if (player->lives < Player::maxLives) {
+                player->setLives(player->lives + 1);
+                livesText->setText(QString("LIVES: %1").arg(player->lives));
+                // blue explosion played backwards, like the ship is being put back together
+                QRectF r = player->bounds();
+                effects.push_back(std::make_unique<Effect>(
+                    *scene(), r.center().x(), r.center().y(), true));
+            }
+        } else if (pickups[i]->offScreen()) {
+            pickups.erase(pickups.begin() + i);
+        } else {
+            ++i;
+        }
+    }
+}
+
 void GameView::moveBullets() {
     // no ++i in the loop header because erasing shifts everything down
     for (size_t i = 0; i < bullets.size();) {
@@ -176,7 +215,7 @@ void GameView::moveEnemyBullets() {
         if (enemyBullets[i]->hitbox().intersects(pr)) {
             enemyBullets.erase(enemyBullets.begin() + i);
             loseLife();
-            if (over) return;
+            if (stopped()) return;
         } else if (enemyBullets[i]->offScreen()) {
             enemyBullets.erase(enemyBullets.begin() + i);
         } else {
@@ -251,7 +290,7 @@ void GameView::checkPlayerHit() {
             enemies.erase(enemies.begin() + i);
             updateEnemySpeed();
             loseLife();
-            if (over) return;
+            if (stopped()) return;
         } else {
             ++i;
         }
@@ -259,9 +298,16 @@ void GameView::checkPlayerHit() {
 }
 
 void GameView::loseLife() {
-    --player->lives;
+    player->setLives(player->lives - 1);
     livesText->setText(QString("LIVES: %1").arg(player->lives));
-    if (player->lives <= 0) endGame("GAME OVER");
+    QRectF r = player->bounds();
+    effects.push_back(std::make_unique<Effect>(
+        *scene(), r.center().x(), r.center().y()));
+    if (player->lives <= 0) {
+        // hide the ship and give the explosion a moment before the end screen
+        player->setOpacity(0);
+        dying = 25;
+    }
 }
 
 // big text in the middle, then stop the timer so everything freezes
@@ -297,6 +343,9 @@ void GameView::restart() {
     enemyBullets.clear();
     enemies.clear();
     effects.clear();
+    pickups.clear();
+    dying = 0;
+    pickupCooldown = 600;
     waveKills = 0;
     enemyCooldown = 90;
     // end screen text is its own items, remove those too

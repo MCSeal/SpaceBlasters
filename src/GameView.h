@@ -11,6 +11,7 @@
 #include "Enemy.h"
 #include "Planet.h"
 #include "Effect.h"
+#include "Pickup.h"
 
 class GameView : public QGraphicsView {
 public:
@@ -27,6 +28,8 @@ private:
     void fire();
     void moveBullets();
     void updateEffects();
+    void updatePickups();
+    bool stopped() const { return over || dying > 0; }
     void enemyFire();
     void moveEnemyBullets();
     void moveEnemies();
@@ -51,6 +54,7 @@ private:
     std::vector<std::unique_ptr<Bullet>> enemyBullets;
     std::vector<std::unique_ptr<Planet>> planets;
     std::vector<std::unique_ptr<Effect>> effects;
+    std::vector<std::unique_ptr<Pickup>> pickups;
 
     QTimer timer;
     int score = 0;
@@ -67,4 +71,8 @@ private:
     int waveKills = 0;
     // ticks until the next enemy shot
     int enemyCooldown = 90;
+    // ticks until a wrench might drop
+    int pickupCooldown = 600;
+    // counts down after the last life is lost so the explosion can play
+    int dying = 0;
 };

@@ -14,6 +14,10 @@ public:
     void startCooldown() { cooldown = 20; } // about a third of a second
     void reset();
 
+    // changes the lives and swaps to the ship drawing for that many
+    void setLives(int n);
+
+    static constexpr int maxLives = 4;
     int lives = 3;
 
 private:
