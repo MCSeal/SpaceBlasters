@@ -73,6 +73,13 @@ private:
     int enemyCooldown = 90;
     // ticks until a wrench might drop
     int pickupCooldown = 600;
-    // counts down after the last life is lost so the explosion can play
+    // ticks until the speed bolt drops this wave, -1 = none coming
+    int boltCooldown = -1;
+    // only one bolt per wave, even if the wave gets replayed
+    bool boltDropped = false;
+    // counts down after the last life is lost so the explosions can play
     int dying = 0;
+    // extra explosions still to go off during the death
+    int blasts = 0;
+    int blastGap = 0;
 };

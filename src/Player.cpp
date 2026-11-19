@@ -7,7 +7,6 @@ Player::Player(QGraphicsScene &scene, const std::set<int> &held)
 
 //movement for player
 void Player::update() {
-    const qreal speed = 5;
     qreal nx = x();
     // arrows or a/d, whichever
     if (held.count(Qt::Key_Left) || held.count(Qt::Key_A))  nx -= speed;
@@ -31,6 +30,7 @@ void Player::setLives(int n) {
 void Player::reset() {
     setLives(3);
     setOpacity(1.0);
+    speed = 5;
     cooldown = 0;
     setPos(360, y());
 }

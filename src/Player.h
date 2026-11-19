@@ -20,7 +20,11 @@ public:
     static constexpr int maxLives = 4;
     int lives = 3;
 
+    // bolts add to this, goes back to normal on reset
+    void addSpeed(qreal extra) { speed += extra; }
+
 private:
     const std::set<int> &held;
     int cooldown = 0;
+    qreal speed = 5;
 };

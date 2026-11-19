@@ -50,6 +50,16 @@ void GameView::keyReleaseEvent(QKeyEvent *e) {
 void GameView::tick() {
     // last life is gone, let the explosion play and then end the game
     if (dying > 0) {
+        // a few more explosions around the ship, one every few ticks
+        if (blasts > 0 && --blastGap <= 0) {
+            auto *rng = QRandomGenerator::global();
+            QRectF r = player->bounds();
+            effects.push_back(std::make_unique<Effect>(
+                *scene(), r.center().x() + rng->bounded(-35, 36),
+                r.center().y() + rng->bounded(-25, 26)));
+            --blasts;
+            blastGap = 7;
+        }
         updateEffects();
         if (--dying == 0) endGame("GAME OVER");
         return;
@@ -108,6 +118,10 @@ void GameView::spawnEnemies() {
         enemies.push_back(std::make_unique<Enemy>(*scene(), 370, 120));
     }
     waveSize = (int)enemies.size();
+
+    // a speed bolt drops early in the 1st and 3rd wave, once each
+    bool boltWave = captured == 0 || captured == 2;
+    boltCooldown = (boltWave && !boltDropped) ? 300 + rng->bounded(600) : -1;
 }
 
 // wave cleared = next planet lights up. all 3 = win, otherwise harder wave
@@ -126,6 +140,7 @@ void GameView::capturePlanet() {
     bullets.clear();
     enemyBullets.clear();
     waveKills = 0;
+    boltDropped = false;
     spawnEnemies();
 }
 
@@ -149,29 +164,48 @@ void GameView::updateEffects() {
     }
 }
 
-// wrenches fall, one that touches the ship gives a life back (max 4).
-// a new one drops now and then, only when theres a life to get back
+// pickups fall, touching one with the ship collects it.
+// wrench = a life back (max 4), bolt = faster ship
 void GameView::updatePickups() {
     auto *rng = QRandomGenerator::global();
+
+    // a wrench drops now and then, only if theres a life to get back
     if (--pickupCooldown <= 0) {
         pickupCooldown = 900 + rng->bounded(900);
-        if (player->lives < Player::maxLives && pickups.empty()) {
-            pickups.push_back(std::make_unique<Pickup>(*scene(), 20 + rng->bounded(720)));
+        bool wrenchFalling = false;
+        for (auto &p : pickups) {
+            if (p->kind() == Pickup::Wrench) wrenchFalling = true;
         }
+        if (player->lives < Player::maxLives && !wrenchFalling) {
+            pickups.push_back(std::make_unique<Pickup>(
+                *scene(), 20 + rng->bounded(720), Pickup::Wrench));
+        }
+    }
+
+    // the bolt timer is set when a wave starts
+    if (boltCooldown > 0 && --boltCooldown == 0) {
+        pickups.push_back(std::make_unique<Pickup>(
+            *scene(), 20 + rng->bounded(720), Pickup::Bolt));
+        boltDropped = true;
     }
 
     QRectF pr = player->hitbox();
     for (size_t i = 0; i < pickups.size();) {
         pickups[i]->update();
         if (pickups[i]->hitbox().intersects(pr)) {
+            Pickup::Kind kind = pickups[i]->kind();
             pickups.erase(pickups.begin() + i);
-            if (player->lives < Player::maxLives) {
+            QRectF r = player->bounds();
+            if (kind == Pickup::Wrench && player->lives < Player::maxLives) {
                 player->setLives(player->lives + 1);
                 livesText->setText(QString("LIVES: %1").arg(player->lives));
                 // blue explosion played backwards, like the ship is being put back together
-                QRectF r = player->bounds();
                 effects.push_back(std::make_unique<Effect>(
-                    *scene(), r.center().x(), r.center().y(), true));
+                    *scene(), r.center().x(), r.center().y(), true, QColor("#1F6BFF")));
+            } else if (kind == Pickup::Bolt) {
+                player->addSpeed(2);
+                effects.push_back(std::make_unique<Effect>(
+                    *scene(), r.center().x(), r.center().y(), true, QColor("#FFD93B")));
             }
         } else if (pickups[i]->offScreen()) {
             pickups.erase(pickups.begin() + i);
@@ -304,9 +338,12 @@ void GameView::loseLife() {
     effects.push_back(std::make_unique<Effect>(
         *scene(), r.center().x(), r.center().y()));
     if (player->lives <= 0) {
-        // hide the ship and give the explosion a moment before the end screen
+        // hide the ship and let a few explosions go off before the end screen,
+        // 3 to 6 in total counting the one above
         player->setOpacity(0);
-        dying = 25;
+        blasts = 2 + QRandomGenerator::global()->bounded(4);
+        blastGap = 7;
+        dying = blasts * 7 + 22;
     }
 }
 
@@ -345,7 +382,9 @@ void GameView::restart() {
     effects.clear();
     pickups.clear();
     dying = 0;
+    blasts = 0;
     pickupCooldown = 600;
+    boltDropped = false;
     waveKills = 0;
     enemyCooldown = 90;
     // end screen text is its own items, remove those too

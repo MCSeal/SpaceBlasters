@@ -5,11 +5,12 @@
 class Effect : public Entity {
 public:
     // cx, cy is where the middle of the explosion goes.
-    // heal = same frames backwards and tinted blue, for picking up a wrench
-    Effect(QGraphicsScene &scene, qreal cx, qreal cy, bool heal = false)
-        : Entity(scene, path(0, heal), cx - size / 2, cy - size / 2, scale),
-          heal(heal) {
-        if (heal) tint(QColor("#1F6BFF"));
+    // pickup = same frames backwards in the given colour, for picking things up
+    Effect(QGraphicsScene &scene, qreal cx, qreal cy,
+           bool pickup = false, const QColor &colour = QColor("#1F6BFF"))
+        : Entity(scene, path(0, pickup), cx - size / 2, cy - size / 2, scale),
+          heal(pickup) {
+        if (pickup) tint(colour);
     }
 
     // swaps to the next frame every few ticks
