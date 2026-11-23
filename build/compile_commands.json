@@ -31,8 +31,44 @@
 },
 {
   "directory": "C:/langproject/build",
+  "command": "c:\\Qt\\Tools\\mingw1310_64\\bin\\g++.exe -DMINGW_HAS_SECURE_API=1 -DQT_CORE_LIB -DQT_GUI_LIB -DQT_SVGWIDGETS_LIB -DQT_SVG_LIB -DQT_WIDGETS_LIB -DUNICODE -DWIN32 -DWIN64 -D_ENABLE_EXTENDED_ALIGNED_STORAGE -D_UNICODE -D_WIN64 @CMakeFiles/SpaceBlasters.dir/includes_CXX.rsp -g -std=gnu++17 -o CMakeFiles\\SpaceBlasters.dir\\src\\GameState.cpp.obj -c C:\\langproject\\src\\GameState.cpp",
+  "file": "C:/langproject/src/GameState.cpp",
+  "output": "CMakeFiles/SpaceBlasters.dir/src/GameState.cpp.obj"
+},
+{
+  "directory": "C:/langproject/build",
   "command": "c:\\Qt\\Tools\\mingw1310_64\\bin\\g++.exe -DMINGW_HAS_SECURE_API=1 -DQT_CORE_LIB -DQT_GUI_LIB -DQT_SVGWIDGETS_LIB -DQT_SVG_LIB -DQT_WIDGETS_LIB -DUNICODE -DWIN32 -DWIN64 -D_ENABLE_EXTENDED_ALIGNED_STORAGE -D_UNICODE -D_WIN64 @CMakeFiles/SpaceBlasters.dir/includes_CXX.rsp -g -std=gnu++17 -o CMakeFiles\\SpaceBlasters.dir\\src\\GameView.cpp.obj -c C:\\langproject\\src\\GameView.cpp",
   "file": "C:/langproject/src/GameView.cpp",
   "output": "CMakeFiles/SpaceBlasters.dir/src/GameView.cpp.obj"
+},
+{
+  "directory": "C:/langproject/build",
+  "command": "c:\\Qt\\Tools\\mingw1310_64\\bin\\g++.exe -DMINGW_HAS_SECURE_API=1 -DQT_CORE_LIB -DQT_TESTCASE_BUILDDIR=\\\"C:/langproject/build\\\" -DQT_TESTCASE_SOURCEDIR=\\\"C:/langproject\\\" -DQT_TESTLIB_LIB -DUNICODE -DWIN32 -DWIN64 -D_ENABLE_EXTENDED_ALIGNED_STORAGE -D_UNICODE -D_WIN64 @CMakeFiles/test_gamestate.dir/includes_CXX.rsp -g -std=gnu++17 -o CMakeFiles\\test_gamestate.dir\\test_gamestate_autogen\\mocs_compilation.cpp.obj -c C:\\langproject\\build\\test_gamestate_autogen\\mocs_compilation.cpp",
+  "file": "C:/langproject/build/test_gamestate_autogen/mocs_compilation.cpp",
+  "output": "CMakeFiles/test_gamestate.dir/test_gamestate_autogen/mocs_compilation.cpp.obj"
+},
+{
+  "directory": "C:/langproject/build",
+  "command": "c:\\Qt\\Tools\\mingw1310_64\\bin\\g++.exe -DMINGW_HAS_SECURE_API=1 -DQT_CORE_LIB -DQT_TESTCASE_BUILDDIR=\\\"C:/langproject/build\\\" -DQT_TESTCASE_SOURCEDIR=\\\"C:/langproject\\\" -DQT_TESTLIB_LIB -DUNICODE -DWIN32 -DWIN64 -D_ENABLE_EXTENDED_ALIGNED_STORAGE -D_UNICODE -D_WIN64 @CMakeFiles/test_gamestate.dir/includes_CXX.rsp -g -std=gnu++17 -o CMakeFiles\\test_gamestate.dir\\tests\\test_gamestate.cpp.obj -c C:\\langproject\\tests\\test_gamestate.cpp",
+  "file": "C:/langproject/tests/test_gamestate.cpp",
+  "output": "CMakeFiles/test_gamestate.dir/tests/test_gamestate.cpp.obj"
+},
+{
+  "directory": "C:/langproject/build",
+  "command": "c:\\Qt\\Tools\\mingw1310_64\\bin\\g++.exe -DMINGW_HAS_SECURE_API=1 -DQT_CORE_LIB -DQT_TESTCASE_BUILDDIR=\\\"C:/langproject/build\\\" -DQT_TESTCASE_SOURCEDIR=\\\"C:/langproject\\\" -DQT_TESTLIB_LIB -DUNICODE -DWIN32 -DWIN64 -D_ENABLE_EXTENDED_ALIGNED_STORAGE -D_UNICODE -D_WIN64 @CMakeFiles/test_gamestate.dir/includes_CXX.rsp -g -std=gnu++17 -o CMakeFiles\\test_gamestate.dir\\src\\GameState.cpp.obj -c C:\\langproject\\src\\GameState.cpp",
+  "file": "C:/langproject/src/GameState.cpp",
+  "output": "CMakeFiles/test_gamestate.dir/src/GameState.cpp.obj"
+},
+{
+  "directory": "C:/langproject/build",
+  "command": "c:\\Qt\\Tools\\mingw1310_64\\bin\\g++.exe -DMINGW_HAS_SECURE_API=1 -DQT_CORE_LIB -DQT_TESTCASE_BUILDDIR=\\\"C:/langproject/build\\\" -DQT_TESTCASE_SOURCEDIR=\\\"C:/langproject\\\" -DQT_TESTLIB_LIB -DUNICODE -DWIN32 -DWIN64 -D_ENABLE_EXTENDED_ALIGNED_STORAGE -D_UNICODE -D_WIN64 @CMakeFiles/test_highscore.dir/includes_CXX.rsp -g -std=gnu++17 -o CMakeFiles\\test_highscore.dir\\test_highscore_autogen\\mocs_compilation.cpp.obj -c C:\\langproject\\build\\test_highscore_autogen\\mocs_compilation.cpp",
+  "file": "C:/langproject/build/test_highscore_autogen/mocs_compilation.cpp",
+  "output": "CMakeFiles/test_highscore.dir/test_highscore_autogen/mocs_compilation.cpp.obj"
+},
+{
+  "directory": "C:/langproject/build",
+  "command": "c:\\Qt\\Tools\\mingw1310_64\\bin\\g++.exe -DMINGW_HAS_SECURE_API=1 -DQT_CORE_LIB -DQT_TESTCASE_BUILDDIR=\\\"C:/langproject/build\\\" -DQT_TESTCASE_SOURCEDIR=\\\"C:/langproject\\\" -DQT_TESTLIB_LIB -DUNICODE -DWIN32 -DWIN64 -D_ENABLE_EXTENDED_ALIGNED_STORAGE -D_UNICODE -D_WIN64 @CMakeFiles/test_highscore.dir/includes_CXX.rsp -g -std=gnu++17 -o CMakeFiles\\test_highscore.dir\\tests\\test_highscore.cpp.obj -c C:\\langproject\\tests\\test_highscore.cpp",
+  "file": "C:/langproject/tests/test_highscore.cpp",
+  "output": "CMakeFiles/test_highscore.dir/tests/test_highscore.cpp.obj"
 }
 ]

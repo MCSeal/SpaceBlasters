@@ -19,16 +19,15 @@ void Player::update() {
     if (cooldown > 0) --cooldown;
 }
 
-// one svg per health, 1 is the most damaged and 4 only comes from a wrench
-void Player::setLives(int n) {
-    lives = n;
-    if (n >= 1 && n <= maxLives) {
+// one svg per health, 4 only comes from a wrench
+void Player::showLives(int n) {
+    if (n >= 1 && n <= 4) {
         setSprite(QString("assets/player-ship-%1.svg").arg(n));
     }
 }
 
 void Player::reset() {
-    setLives(3);
+    showLives(3);
     setOpacity(1.0);
     speed = 5;
     cooldown = 0;

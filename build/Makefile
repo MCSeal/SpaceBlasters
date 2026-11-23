@@ -64,6 +64,16 @@ CMAKE_BINARY_DIR = C:\langproject\build
 #=============================================================================
 # Targets provided globally by CMake.
 
+# Special rule for the target test
+test:
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --cyan "Running tests..."
+	C:\Qt\Tools\CMake_64\bin\ctest.exe --force-new-ctest-process $(ARGS)
+.PHONY : test
+
+# Special rule for the target test
+test/fast: test
+.PHONY : test/fast
+
 # Special rule for the target edit_cache
 edit_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --cyan "Running CMake cache editor..."
@@ -129,6 +139,32 @@ SpaceBlasters/fast:
 .PHONY : SpaceBlasters/fast
 
 #=============================================================================
+# Target rules for targets named test_gamestate
+
+# Build rule for target.
+test_gamestate: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 test_gamestate
+.PHONY : test_gamestate
+
+# fast build rule for target.
+test_gamestate/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\test_gamestate.dir\build.make CMakeFiles/test_gamestate.dir/build
+.PHONY : test_gamestate/fast
+
+#=============================================================================
+# Target rules for targets named test_highscore
+
+# Build rule for target.
+test_highscore: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 test_highscore
+.PHONY : test_highscore
+
+# fast build rule for target.
+test_highscore/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\test_highscore.dir\build.make CMakeFiles/test_highscore.dir/build
+.PHONY : test_highscore/fast
+
+#=============================================================================
 # Target rules for targets named SpaceBlasters_autogen_timestamp_deps
 
 # Build rule for target.
@@ -153,6 +189,58 @@ SpaceBlasters_autogen: cmake_check_build_system
 SpaceBlasters_autogen/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\SpaceBlasters_autogen.dir\build.make CMakeFiles/SpaceBlasters_autogen.dir/build
 .PHONY : SpaceBlasters_autogen/fast
+
+#=============================================================================
+# Target rules for targets named test_gamestate_autogen_timestamp_deps
+
+# Build rule for target.
+test_gamestate_autogen_timestamp_deps: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 test_gamestate_autogen_timestamp_deps
+.PHONY : test_gamestate_autogen_timestamp_deps
+
+# fast build rule for target.
+test_gamestate_autogen_timestamp_deps/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\test_gamestate_autogen_timestamp_deps.dir\build.make CMakeFiles/test_gamestate_autogen_timestamp_deps.dir/build
+.PHONY : test_gamestate_autogen_timestamp_deps/fast
+
+#=============================================================================
+# Target rules for targets named test_gamestate_autogen
+
+# Build rule for target.
+test_gamestate_autogen: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 test_gamestate_autogen
+.PHONY : test_gamestate_autogen
+
+# fast build rule for target.
+test_gamestate_autogen/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\test_gamestate_autogen.dir\build.make CMakeFiles/test_gamestate_autogen.dir/build
+.PHONY : test_gamestate_autogen/fast
+
+#=============================================================================
+# Target rules for targets named test_highscore_autogen_timestamp_deps
+
+# Build rule for target.
+test_highscore_autogen_timestamp_deps: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 test_highscore_autogen_timestamp_deps
+.PHONY : test_highscore_autogen_timestamp_deps
+
+# fast build rule for target.
+test_highscore_autogen_timestamp_deps/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\test_highscore_autogen_timestamp_deps.dir\build.make CMakeFiles/test_highscore_autogen_timestamp_deps.dir/build
+.PHONY : test_highscore_autogen_timestamp_deps/fast
+
+#=============================================================================
+# Target rules for targets named test_highscore_autogen
+
+# Build rule for target.
+test_highscore_autogen: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 test_highscore_autogen
+.PHONY : test_highscore_autogen
+
+# fast build rule for target.
+test_highscore_autogen/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\test_highscore_autogen.dir\build.make CMakeFiles/test_highscore_autogen.dir/build
+.PHONY : test_highscore_autogen/fast
 
 SpaceBlasters_autogen/mocs_compilation.obj: SpaceBlasters_autogen/mocs_compilation.cpp.obj
 .PHONY : SpaceBlasters_autogen/mocs_compilation.obj
@@ -201,6 +289,33 @@ src/Entity.s: src/Entity.cpp.s
 src/Entity.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\SpaceBlasters.dir\build.make CMakeFiles/SpaceBlasters.dir/src/Entity.cpp.s
 .PHONY : src/Entity.cpp.s
+
+src/GameState.obj: src/GameState.cpp.obj
+.PHONY : src/GameState.obj
+
+# target to build an object file
+src/GameState.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\SpaceBlasters.dir\build.make CMakeFiles/SpaceBlasters.dir/src/GameState.cpp.obj
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\test_gamestate.dir\build.make CMakeFiles/test_gamestate.dir/src/GameState.cpp.obj
+.PHONY : src/GameState.cpp.obj
+
+src/GameState.i: src/GameState.cpp.i
+.PHONY : src/GameState.i
+
+# target to preprocess a source file
+src/GameState.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\SpaceBlasters.dir\build.make CMakeFiles/SpaceBlasters.dir/src/GameState.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\test_gamestate.dir\build.make CMakeFiles/test_gamestate.dir/src/GameState.cpp.i
+.PHONY : src/GameState.cpp.i
+
+src/GameState.s: src/GameState.cpp.s
+.PHONY : src/GameState.s
+
+# target to generate assembly for a file
+src/GameState.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\SpaceBlasters.dir\build.make CMakeFiles/SpaceBlasters.dir/src/GameState.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\test_gamestate.dir\build.make CMakeFiles/test_gamestate.dir/src/GameState.cpp.s
+.PHONY : src/GameState.cpp.s
 
 src/GameView.obj: src/GameView.cpp.obj
 .PHONY : src/GameView.obj
@@ -298,6 +413,102 @@ src/main.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\SpaceBlasters.dir\build.make CMakeFiles/SpaceBlasters.dir/src/main.cpp.s
 .PHONY : src/main.cpp.s
 
+test_gamestate_autogen/mocs_compilation.obj: test_gamestate_autogen/mocs_compilation.cpp.obj
+.PHONY : test_gamestate_autogen/mocs_compilation.obj
+
+# target to build an object file
+test_gamestate_autogen/mocs_compilation.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\test_gamestate.dir\build.make CMakeFiles/test_gamestate.dir/test_gamestate_autogen/mocs_compilation.cpp.obj
+.PHONY : test_gamestate_autogen/mocs_compilation.cpp.obj
+
+test_gamestate_autogen/mocs_compilation.i: test_gamestate_autogen/mocs_compilation.cpp.i
+.PHONY : test_gamestate_autogen/mocs_compilation.i
+
+# target to preprocess a source file
+test_gamestate_autogen/mocs_compilation.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\test_gamestate.dir\build.make CMakeFiles/test_gamestate.dir/test_gamestate_autogen/mocs_compilation.cpp.i
+.PHONY : test_gamestate_autogen/mocs_compilation.cpp.i
+
+test_gamestate_autogen/mocs_compilation.s: test_gamestate_autogen/mocs_compilation.cpp.s
+.PHONY : test_gamestate_autogen/mocs_compilation.s
+
+# target to generate assembly for a file
+test_gamestate_autogen/mocs_compilation.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\test_gamestate.dir\build.make CMakeFiles/test_gamestate.dir/test_gamestate_autogen/mocs_compilation.cpp.s
+.PHONY : test_gamestate_autogen/mocs_compilation.cpp.s
+
+test_highscore_autogen/mocs_compilation.obj: test_highscore_autogen/mocs_compilation.cpp.obj
+.PHONY : test_highscore_autogen/mocs_compilation.obj
+
+# target to build an object file
+test_highscore_autogen/mocs_compilation.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\test_highscore.dir\build.make CMakeFiles/test_highscore.dir/test_highscore_autogen/mocs_compilation.cpp.obj
+.PHONY : test_highscore_autogen/mocs_compilation.cpp.obj
+
+test_highscore_autogen/mocs_compilation.i: test_highscore_autogen/mocs_compilation.cpp.i
+.PHONY : test_highscore_autogen/mocs_compilation.i
+
+# target to preprocess a source file
+test_highscore_autogen/mocs_compilation.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\test_highscore.dir\build.make CMakeFiles/test_highscore.dir/test_highscore_autogen/mocs_compilation.cpp.i
+.PHONY : test_highscore_autogen/mocs_compilation.cpp.i
+
+test_highscore_autogen/mocs_compilation.s: test_highscore_autogen/mocs_compilation.cpp.s
+.PHONY : test_highscore_autogen/mocs_compilation.s
+
+# target to generate assembly for a file
+test_highscore_autogen/mocs_compilation.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\test_highscore.dir\build.make CMakeFiles/test_highscore.dir/test_highscore_autogen/mocs_compilation.cpp.s
+.PHONY : test_highscore_autogen/mocs_compilation.cpp.s
+
+tests/test_gamestate.obj: tests/test_gamestate.cpp.obj
+.PHONY : tests/test_gamestate.obj
+
+# target to build an object file
+tests/test_gamestate.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\test_gamestate.dir\build.make CMakeFiles/test_gamestate.dir/tests/test_gamestate.cpp.obj
+.PHONY : tests/test_gamestate.cpp.obj
+
+tests/test_gamestate.i: tests/test_gamestate.cpp.i
+.PHONY : tests/test_gamestate.i
+
+# target to preprocess a source file
+tests/test_gamestate.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\test_gamestate.dir\build.make CMakeFiles/test_gamestate.dir/tests/test_gamestate.cpp.i
+.PHONY : tests/test_gamestate.cpp.i
+
+tests/test_gamestate.s: tests/test_gamestate.cpp.s
+.PHONY : tests/test_gamestate.s
+
+# target to generate assembly for a file
+tests/test_gamestate.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\test_gamestate.dir\build.make CMakeFiles/test_gamestate.dir/tests/test_gamestate.cpp.s
+.PHONY : tests/test_gamestate.cpp.s
+
+tests/test_highscore.obj: tests/test_highscore.cpp.obj
+.PHONY : tests/test_highscore.obj
+
+# target to build an object file
+tests/test_highscore.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\test_highscore.dir\build.make CMakeFiles/test_highscore.dir/tests/test_highscore.cpp.obj
+.PHONY : tests/test_highscore.cpp.obj
+
+tests/test_highscore.i: tests/test_highscore.cpp.i
+.PHONY : tests/test_highscore.i
+
+# target to preprocess a source file
+tests/test_highscore.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\test_highscore.dir\build.make CMakeFiles/test_highscore.dir/tests/test_highscore.cpp.i
+.PHONY : tests/test_highscore.cpp.i
+
+tests/test_highscore.s: tests/test_highscore.cpp.s
+.PHONY : tests/test_highscore.s
+
+# target to generate assembly for a file
+tests/test_highscore.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\test_highscore.dir\build.make CMakeFiles/test_highscore.dir/tests/test_highscore.cpp.s
+.PHONY : tests/test_highscore.cpp.s
+
 # Help Target
 help:
 	@echo The following are some of the valid targets for this Makefile:
@@ -306,15 +517,25 @@ help:
 	@echo ... depend
 	@echo ... edit_cache
 	@echo ... rebuild_cache
+	@echo ... test
 	@echo ... SpaceBlasters_autogen
 	@echo ... SpaceBlasters_autogen_timestamp_deps
+	@echo ... test_gamestate_autogen
+	@echo ... test_gamestate_autogen_timestamp_deps
+	@echo ... test_highscore_autogen
+	@echo ... test_highscore_autogen_timestamp_deps
 	@echo ... SpaceBlasters
+	@echo ... test_gamestate
+	@echo ... test_highscore
 	@echo ... SpaceBlasters_autogen/mocs_compilation.obj
 	@echo ... SpaceBlasters_autogen/mocs_compilation.i
 	@echo ... SpaceBlasters_autogen/mocs_compilation.s
 	@echo ... src/Entity.obj
 	@echo ... src/Entity.i
 	@echo ... src/Entity.s
+	@echo ... src/GameState.obj
+	@echo ... src/GameState.i
+	@echo ... src/GameState.s
 	@echo ... src/GameView.obj
 	@echo ... src/GameView.i
 	@echo ... src/GameView.s
@@ -327,6 +548,18 @@ help:
 	@echo ... src/main.obj
 	@echo ... src/main.i
 	@echo ... src/main.s
+	@echo ... test_gamestate_autogen/mocs_compilation.obj
+	@echo ... test_gamestate_autogen/mocs_compilation.i
+	@echo ... test_gamestate_autogen/mocs_compilation.s
+	@echo ... test_highscore_autogen/mocs_compilation.obj
+	@echo ... test_highscore_autogen/mocs_compilation.i
+	@echo ... test_highscore_autogen/mocs_compilation.s
+	@echo ... tests/test_gamestate.obj
+	@echo ... tests/test_gamestate.i
+	@echo ... tests/test_gamestate.s
+	@echo ... tests/test_highscore.obj
+	@echo ... tests/test_highscore.i
+	@echo ... tests/test_highscore.s
 .PHONY : help
 
 

@@ -13,7 +13,7 @@ GameView::GameView(QGraphicsScene *scene, QGraphicsSimpleTextItem *scoreText)
     player = std::make_unique<Player>(*scene, held);
 
     // lives text top right, made here since only the view touches it
-    livesText = scene->addSimpleText("LIVES: 3");
+    livesText = scene->addSimpleText(QString("LIVES: %1").arg(state.lives()));
     livesText->setFont(QFont("Consolas", 16));
     livesText->setBrush(QColor("#5DCAA5"));
     livesText->setPos(660, 10);
@@ -82,11 +82,9 @@ void GameView::tick() {
     updatePickups();
     if (enemies.empty()) {
         // shooting down at least half the wave counts as a clear
-        if (waveKills * 2 >= waveSize) {
+        if (state.waveCleared()) {
             capturePlanet();
         } else {
-            waveKills = 0;
-            enemySpeed = baseSpeed;
             enemyDir = 1;
             enemyBullets.clear();
             spawnEnemies();
@@ -97,8 +95,8 @@ void GameView::tick() {
 // bigger every wave: 2x5, 2x6, 3x7. later waves get random gaps and some tough enemies.
 // called at start, on restart and for every new wave
 void GameView::spawnEnemies() {
-    int rows = captured >= 2 ? 3 : 2;
-    int cols = 5 + captured;
+    int rows = state.rows();
+    int cols = state.cols();
     // centre the block, enemies are about 60px wide with 10px between
     qreal startX = (800 - ((cols - 1) * 70 + 60)) / 2.0;
     auto *rng = QRandomGenerator::global();
@@ -106,10 +104,10 @@ void GameView::spawnEnemies() {
     for (int row = 0; row < rows; ++row) {
         for (int col = 0; col < cols; ++col) {
             // first wave is always full so it stays predictable
-            if (captured > 0 && rng->bounded(100) < 15) continue;
+            if (rng->bounded(100) < state.holeChance()) continue;
             auto e = std::make_unique<Enemy>(
                 *scene(), startX + col * 70, 120 + row * 90);
-            if (captured > 0 && rng->bounded(100) < 25) e->makeTough();
+            if (rng->bounded(100) < state.toughChance()) e->makeTough();
             enemies.push_back(std::move(e));
         }
     }
@@ -117,30 +115,25 @@ void GameView::spawnEnemies() {
     if (enemies.empty()) {
         enemies.push_back(std::make_unique<Enemy>(*scene(), 370, 120));
     }
-    waveSize = (int)enemies.size();
+    state.startWave((int)enemies.size());
 
-    // a speed bolt drops early in the 1st and 3rd wave, once each
-    bool boltWave = captured == 0 || captured == 2;
-    boltCooldown = (boltWave && !boltDropped) ? 300 + rng->bounded(600) : -1;
+    // the state says if a bolt is due this wave, then it drops 5 to 15 seconds in
+    boltCooldown = state.boltPending() ? 300 + rng->bounded(600) : -1;
 }
 
 // wave cleared = next planet lights up. all 3 = win, otherwise harder wave
 void GameView::capturePlanet() {
-    planets[captured]->capture();
-    ++captured;
-    if (captured == (int)planets.size()) {
+    int lit = state.wave();
+    bool won = state.capturePlanet();
+    planets[lit]->capture();
+    if (won) {
         endGame("YOU WIN");
         return;
     }
-    // each wave starts a bit faster than the last
-    baseSpeed += 0.3;
-    enemySpeed = baseSpeed;
     enemyDir = 1;
     // leftover bullets from the last wave would clip the new enemies
     bullets.clear();
     enemyBullets.clear();
-    waveKills = 0;
-    boltDropped = false;
     spawnEnemies();
 }
 
@@ -176,7 +169,7 @@ void GameView::updatePickups() {
         for (auto &p : pickups) {
             if (p->kind() == Pickup::Wrench) wrenchFalling = true;
         }
-        if (player->lives < Player::maxLives && !wrenchFalling) {
+        if (state.lives() < GameState::maxLives && !wrenchFalling) {
             pickups.push_back(std::make_unique<Pickup>(
                 *scene(), 20 + rng->bounded(720), Pickup::Wrench));
         }
@@ -186,7 +179,7 @@ void GameView::updatePickups() {
     if (boltCooldown > 0 && --boltCooldown == 0) {
         pickups.push_back(std::make_unique<Pickup>(
             *scene(), 20 + rng->bounded(720), Pickup::Bolt));
-        boltDropped = true;
+        state.boltHasDropped();
     }
 
     QRectF pr = player->hitbox();
@@ -196,14 +189,15 @@ void GameView::updatePickups() {
             Pickup::Kind kind = pickups[i]->kind();
             pickups.erase(pickups.begin() + i);
             QRectF r = player->bounds();
-            if (kind == Pickup::Wrench && player->lives < Player::maxLives) {
-                player->setLives(player->lives + 1);
-                livesText->setText(QString("LIVES: %1").arg(player->lives));
+            if (kind == Pickup::Wrench && state.gainLife()) {
+                player->showLives(state.lives());
+                livesText->setText(QString("LIVES: %1").arg(state.lives()));
                 // blue explosion played backwards, like the ship is being put back together
                 effects.push_back(std::make_unique<Effect>(
                     *scene(), r.center().x(), r.center().y(), true, QColor("#1F6BFF")));
             } else if (kind == Pickup::Bolt) {
-                player->addSpeed(2);
+                state.collectBolt();
+                player->setSpeed(state.playerSpeed());
                 effects.push_back(std::make_unique<Effect>(
                     *scene(), r.center().x(), r.center().y(), true, QColor("#FFD93B")));
             }
@@ -232,7 +226,7 @@ void GameView::moveBullets() {
 void GameView::enemyFire() {
     if (enemies.empty()) return;
     if (--enemyCooldown > 0) return;
-    enemyCooldown = qMax(30, 100 - captured * 25) + QRandomGenerator::global()->bounded(40);
+    enemyCooldown = state.enemyFireDelay() + QRandomGenerator::global()->bounded(40);
 
     auto &shooter = enemies[QRandomGenerator::global()->bounded((int)enemies.size())];
     QRectF r = shooter->bounds();
@@ -260,7 +254,7 @@ void GameView::moveEnemyBullets() {
 
 // whole formation slides sideways, drops down when any enemy hits a wall
 void GameView::moveEnemies() {
-    qreal step = enemyDir * enemySpeed;
+    qreal step = enemyDir * state.enemySpeed((int)enemies.size());
     bool atEdge = false;
     // look ahead first so nothing ever ends up past the wall
     for (auto &e : enemies) {
@@ -273,11 +267,6 @@ void GameView::moveEnemies() {
     } else {
         for (auto &e : enemies) e->moveBy(step, 0);
     }
-}
-
-// fewer enemies left = faster. starts at baseSpeed, adds up to +1.5 by the last one
-void GameView::updateEnemySpeed() {
-    enemySpeed = baseSpeed + (waveSize - (int)enemies.size()) * 1.5 / waveSize;
 }
 
 // checks every bullet against every enemy, fine for 10 enemies
@@ -294,11 +283,10 @@ void GameView::checkHits() {
                     QRectF r = enemies[e]->bounds();
                     effects.push_back(std::make_unique<Effect>(
                         *scene(), r.center().x(), r.center().y()));
-                    score += enemies[e]->points;
+                    state.addScore(enemies[e]->points);
+                    state.recordKill();
                     enemies.erase(enemies.begin() + e);
-                    ++waveKills;
-                    scoreText->setText(QString("SCORE: %1").arg(score));
-                    updateEnemySpeed();
+                    scoreText->setText(QString("SCORE: %1").arg(state.score()));
                 }
                 break;
             }
@@ -322,7 +310,6 @@ void GameView::checkPlayerHit() {
                     *scene(), r.center().x(), r.center().y()));
             }
             enemies.erase(enemies.begin() + i);
-            updateEnemySpeed();
             loseLife();
             if (stopped()) return;
         } else {
@@ -332,12 +319,13 @@ void GameView::checkPlayerHit() {
 }
 
 void GameView::loseLife() {
-    player->setLives(player->lives - 1);
-    livesText->setText(QString("LIVES: %1").arg(player->lives));
+    bool dead = state.loseLife();
+    player->showLives(state.lives());
+    livesText->setText(QString("LIVES: %1").arg(state.lives()));
     QRectF r = player->bounds();
     effects.push_back(std::make_unique<Effect>(
         *scene(), r.center().x(), r.center().y()));
-    if (player->lives <= 0) {
+    if (dead) {
         // hide the ship and let a few explosions go off before the end screen,
         // 3 to 6 in total counting the one above
         player->setOpacity(0);
@@ -358,8 +346,8 @@ void GameView::endGame(const QString &message) {
     
     // grab the old best before saving so we know if this run beat it
     int oldBest = HighScore::best();
-    HighScore::save(score, captured, message == "YOU WIN" ? "win" : "loss");
-    int best = qMax(oldBest, score);
+    HighScore::save(state.score(), state.wave(), message == "YOU WIN" ? "win" : "loss");
+    int best = qMax(oldBest, state.score());
 
     endText = scene()->addSimpleText(message);
     endText->setFont(QFont("Consolas", 48));
@@ -367,7 +355,7 @@ void GameView::endGame(const QString &message) {
     endText->setPos(400 - endText->boundingRect().width() / 2, 240);
 
     QString hint = QString("best: %1   press R to restart").arg(best);
-    if (score > oldBest) hint = "new best!   press R to restart";
+    if (state.score() > oldBest) hint = "new best!   press R to restart";
     hintText = scene()->addSimpleText(hint);
     hintText->setFont(QFont("Consolas", 16));
     hintText->setBrush(QColor("#5DCAA5"));
@@ -384,8 +372,6 @@ void GameView::restart() {
     dying = 0;
     blasts = 0;
     pickupCooldown = 600;
-    boltDropped = false;
-    waveKills = 0;
     enemyCooldown = 90;
     // end screen text is its own items, remove those too
     scene()->removeItem(endText);
@@ -397,15 +383,12 @@ void GameView::restart() {
 
     // planets go back to dim, waves back to the first one
     for (auto &p : planets) p->reset();
-    captured = 0;
-    baseSpeed = 1;
+    state.reset();
 
-    score = 0;
     enemyDir = 1;
-    enemySpeed = baseSpeed;
     over = false;
     scoreText->setText("SCORE: 0");
-    livesText->setText("LIVES: 3");
+    livesText->setText(QString("LIVES: %1").arg(state.lives()));
     player->reset();
     // dont carry over keys that were held when the game ended
     held.clear();

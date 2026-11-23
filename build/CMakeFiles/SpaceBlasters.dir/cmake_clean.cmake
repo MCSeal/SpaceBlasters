@@ -6,6 +6,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/SpaceBlasters.dir/SpaceBlasters_autogen/mocs_compilation.cpp.obj.d"
   "CMakeFiles/SpaceBlasters.dir/src/Entity.cpp.obj"
   "CMakeFiles/SpaceBlasters.dir/src/Entity.cpp.obj.d"
+  "CMakeFiles/SpaceBlasters.dir/src/GameState.cpp.obj"
+  "CMakeFiles/SpaceBlasters.dir/src/GameState.cpp.obj.d"
   "CMakeFiles/SpaceBlasters.dir/src/GameView.cpp.obj"
   "CMakeFiles/SpaceBlasters.dir/src/GameView.cpp.obj.d"
   "CMakeFiles/SpaceBlasters.dir/src/Planet.cpp.obj"

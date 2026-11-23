@@ -1,5 +1,12 @@
 C:/langproject/build/CMakeFiles/SpaceBlasters.dir
+C:/langproject/build/CMakeFiles/test_gamestate.dir
+C:/langproject/build/CMakeFiles/test_highscore.dir
+C:/langproject/build/CMakeFiles/test.dir
 C:/langproject/build/CMakeFiles/edit_cache.dir
 C:/langproject/build/CMakeFiles/rebuild_cache.dir
 C:/langproject/build/CMakeFiles/SpaceBlasters_autogen_timestamp_deps.dir
 C:/langproject/build/CMakeFiles/SpaceBlasters_autogen.dir
+C:/langproject/build/CMakeFiles/test_gamestate_autogen_timestamp_deps.dir
+C:/langproject/build/CMakeFiles/test_gamestate_autogen.dir
+C:/langproject/build/CMakeFiles/test_highscore_autogen_timestamp_deps.dir
+C:/langproject/build/CMakeFiles/test_highscore_autogen.dir

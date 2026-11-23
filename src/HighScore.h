@@ -8,8 +8,10 @@
 namespace HighScore {
     inline const QString file = "scores.csv";
 
-    inline void save(int score, int planets, const QString &outcome) {
-        QFile f(file);
+    // path is only changed by the tests
+    inline void save(int score, int planets, const QString &outcome,
+                     const QString &path = file) {
+        QFile f(path);
         // append so old games stay in the file
         if (!f.open(QIODevice::Append | QIODevice::Text)) return;
         QTextStream out(&f);
@@ -18,8 +20,8 @@ namespace HighScore {
     }
 
     // reads every line and keeps the biggest score. 0 if no file yet
-    inline int best() {
-        QFile f(file);
+    inline int best(const QString &path = file) {
+        QFile f(path);
         if (!f.open(QIODevice::ReadOnly | QIODevice::Text)) return 0;
         QTextStream in(&f);
         int best = 0;

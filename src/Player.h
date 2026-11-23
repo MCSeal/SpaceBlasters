@@ -14,14 +14,11 @@ public:
     void startCooldown() { cooldown = 20; } // about a third of a second
     void reset();
 
-    // changes the lives and swaps to the ship drawing for that many
-    void setLives(int n);
+    // swaps to the ship drawing for that many lives. 1 is the most damaged
+    void showLives(int n);
 
-    static constexpr int maxLives = 4;
-    int lives = 3;
-
-    // bolts add to this, goes back to normal on reset
-    void addSpeed(qreal extra) { speed += extra; }
+    // pixels per tick, the view sets this from the game state
+    void setSpeed(qreal s) { speed = s; }
 
 private:
     const std::set<int> &held;
