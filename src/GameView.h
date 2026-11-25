@@ -13,6 +13,7 @@
 #include "Effect.h"
 #include "Pickup.h"
 #include "GameState.h"
+#include "Starfield.h"
 
 class GameView : public QGraphicsView {
 public:
@@ -39,6 +40,10 @@ private:
     void loseLife();
     void endGame(const QString &message);
     void restart();
+    // dark cover with big text, used for the title screen and pause
+    void showOverlay(const QString &title, const QStringList &lines, int dim);
+    void hideOverlay();
+    void togglePause();
 
     QGraphicsSimpleTextItem *scoreText;
     QGraphicsSimpleTextItem *livesText = nullptr;
@@ -55,6 +60,12 @@ private:
     std::vector<std::unique_ptr<Planet>> planets;
     std::vector<std::unique_ptr<Effect>> effects;
     std::vector<std::unique_ptr<Pickup>> pickups;
+
+    // title screen first, then playing. pause freezes everything
+    enum class Mode { Title, Playing, Paused };
+    Mode mode = Mode::Title;
+    std::vector<QGraphicsItem *> overlay;
+    std::unique_ptr<Starfield> stars;
 
     QTimer timer;
     // score, lives, waves and the rules around them

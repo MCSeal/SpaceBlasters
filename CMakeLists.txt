@@ -27,16 +27,35 @@ if(Qt6Test_FOUND)
     add_executable(test_gamestate tests/test_gamestate.cpp src/GameState.cpp)
     target_include_directories(test_gamestate PRIVATE src)
     target_link_libraries(test_gamestate Qt6::Test)
-    add_test(NAME GameState COMMAND test_gamestate)
 
     add_executable(test_highscore tests/test_highscore.cpp)
     target_include_directories(test_highscore PRIVATE src)
     target_link_libraries(test_highscore Qt6::Test)
-    add_test(NAME HighScore COMMAND test_highscore)
+
+    # one ctest entry per check so each one shows up on its own.
+    # the names have to match the slots in the test files
+    set(gamestate_checks
+        startsWithThreeLives loseLifeEndsGameAtZero wrenchStopsAtFour scoreAdds
+        captureNeedsHalfTheWave thirdCaptureWins waveSizesGrow firstWaveIsPlain
+        boltAddsTwoSpeed boltOnlyInFirstAndThirdWave enemiesSpeedUp
+        enemyFireGetsFaster resetGoesBackToStart)
+    set(highscore_checks
+        noFileMeansZero saveThenBest bestIsTheBiggestNotTheLast
+        oldGamesStayInTheFile badLinesAreSkipped)
+
+    set(all_checks)
+    foreach(c ${gamestate_checks})
+        add_test(NAME GameState.${c} COMMAND test_gamestate ${c})
+        list(APPEND all_checks GameState.${c})
+    endforeach()
+    foreach(c ${highscore_checks})
+        add_test(NAME HighScore.${c} COMMAND test_highscore ${c})
+        list(APPEND all_checks HighScore.${c})
+    endforeach()
 
     # on windows the tests need the Qt dlls on the path to start from ctest
     if(WIN32 AND NOT CMAKE_VERSION VERSION_LESS 3.22)
-        foreach(t GameState HighScore)
+        foreach(t ${all_checks})
             set_tests_properties(${t} PROPERTIES ENVIRONMENT_MODIFICATION
                 "PATH=path_list_prepend:$<TARGET_FILE_DIR:Qt6::Core>")
         endforeach()

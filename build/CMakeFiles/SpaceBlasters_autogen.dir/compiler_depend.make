@@ -168,6 +168,16 @@ SpaceBlasters_autogen/timestamp: C:/Qt/6.11.2/mingw_64/lib/cmake/Qt6/FindWrapAto
   C:/Qt/6.11.2/mingw_64/lib/cmake/Qt6SvgWidgets/Qt6SvgWidgetsTargets.cmake \
   C:/Qt/6.11.2/mingw_64/lib/cmake/Qt6SvgWidgets/Qt6SvgWidgetsTargetsPrecheck.cmake \
   C:/Qt/6.11.2/mingw_64/lib/cmake/Qt6SvgWidgets/Qt6SvgWidgetsVersionlessAliasTargets.cmake \
+  C:/Qt/6.11.2/mingw_64/lib/cmake/Qt6Test/Qt6TestAdditionalTargetInfo.cmake \
+  C:/Qt/6.11.2/mingw_64/lib/cmake/Qt6Test/Qt6TestConfig.cmake \
+  C:/Qt/6.11.2/mingw_64/lib/cmake/Qt6Test/Qt6TestConfigVersion.cmake \
+  C:/Qt/6.11.2/mingw_64/lib/cmake/Qt6Test/Qt6TestConfigVersionImpl.cmake \
+  C:/Qt/6.11.2/mingw_64/lib/cmake/Qt6Test/Qt6TestDependencies.cmake \
+  C:/Qt/6.11.2/mingw_64/lib/cmake/Qt6Test/Qt6TestTargets-relwithdebinfo.cmake \
+  C:/Qt/6.11.2/mingw_64/lib/cmake/Qt6Test/Qt6TestTargets.cmake \
+  C:/Qt/6.11.2/mingw_64/lib/cmake/Qt6Test/Qt6TestTargetsPrecheck.cmake \
+  C:/Qt/6.11.2/mingw_64/lib/cmake/Qt6Test/Qt6TestVersionlessAliasTargets.cmake \
+  C:/Qt/6.11.2/mingw_64/lib/cmake/Qt6Test/QtTestProperties.cmake \
   C:/Qt/6.11.2/mingw_64/lib/cmake/Qt6Widgets/Qt6QModernWindowsStylePluginAdditionalTargetInfo.cmake \
   C:/Qt/6.11.2/mingw_64/lib/cmake/Qt6Widgets/Qt6QModernWindowsStylePluginConfig.cmake \
   C:/Qt/6.11.2/mingw_64/lib/cmake/Qt6Widgets/Qt6QModernWindowsStylePluginTargets-relwithdebinfo.cmake \
@@ -319,6 +329,8 @@ SpaceBlasters_autogen/timestamp: C:/Qt/6.11.2/mingw_64/lib/cmake/Qt6/FindWrapAto
   CMakeFiles/3.30.5/CMakeSystem.cmake \
   C:/langproject/src/Entity.cpp \
   C:/langproject/src/Entity.h \
+  C:/langproject/src/GameState.cpp \
+  C:/langproject/src/GameState.h \
   C:/langproject/src/GameView.cpp \
   C:/langproject/src/GameView.h \
   C:/langproject/src/Planet.cpp \
@@ -979,9 +991,9 @@ C:/Qt/6.11.2/mingw_64/lib/cmake/Qt6Gui/Qt6QJpegPluginAdditionalTargetInfo.cmake:
 
 C:/Qt/6.11.2/mingw_64/lib/cmake/Qt6Gui/Qt6QJpegPluginTargets-relwithdebinfo.cmake:
 
-C:/Qt/6.11.2/mingw_64/lib/cmake/Qt6Test/Qt6TestDependencies.cmake:
-
 C:/Qt/Tools/CMake_64/share/cmake-3.30/Modules/Internal/CheckFlagCommonConfig.cmake:
+
+C:/Qt/6.11.2/mingw_64/lib/cmake/Qt6Test/Qt6TestDependencies.cmake:
 
 C:/Qt/6.11.2/mingw_64/lib/cmake/Qt6Gui/Qt6QJpegPluginTargets.cmake:
 
@@ -1115,6 +1127,22 @@ C:/Qt/6.11.2/mingw_64/lib/cmake/Qt6SvgWidgets/Qt6SvgWidgetsTargetsPrecheck.cmake
 
 C:/Qt/6.11.2/mingw_64/lib/cmake/Qt6SvgWidgets/Qt6SvgWidgetsVersionlessAliasTargets.cmake:
 
+C:/Qt/6.11.2/mingw_64/lib/cmake/Qt6Test/Qt6TestAdditionalTargetInfo.cmake:
+
+C:/Qt/6.11.2/mingw_64/lib/cmake/Qt6Test/Qt6TestConfig.cmake:
+
+C:/Qt/6.11.2/mingw_64/lib/cmake/Qt6Test/Qt6TestConfigVersion.cmake:
+
+C:/Qt/6.11.2/mingw_64/lib/cmake/Qt6Test/Qt6TestConfigVersionImpl.cmake:
+
+C:/Qt/6.11.2/mingw_64/lib/cmake/Qt6Test/Qt6TestTargets-relwithdebinfo.cmake:
+
+C:/Qt/Tools/CMake_64/share/cmake-3.30/Modules/CMakeDetermineCompilerSupport.cmake:
+
+C:/Qt/6.11.2/mingw_64/lib/cmake/Qt6Test/Qt6TestTargets.cmake:
+
+C:/Qt/6.11.2/mingw_64/lib/cmake/Qt6Test/QtTestProperties.cmake:
+
 C:/Qt/6.11.2/mingw_64/lib/cmake/Qt6Widgets/Qt6QModernWindowsStylePluginAdditionalTargetInfo.cmake:
 
 C:/Qt/6.11.2/mingw_64/lib/cmake/Qt6Widgets/Qt6QModernWindowsStylePluginTargets.cmake:
@@ -1174,10 +1202,6 @@ C:/Qt/Tools/CMake_64/share/cmake-3.30/Modules/CMakeMinGWFindMake.cmake:
 C:/Qt/Tools/CMake_64/share/cmake-3.30/Modules/CMakeDetermineCXXCompiler.cmake:
 
 C:/Qt/Tools/CMake_64/share/cmake-3.30/Modules/CMakeDetermineCompilerABI.cmake:
-
-C:/Qt/6.11.2/mingw_64/lib/cmake/Qt6Test/Qt6TestTargets.cmake:
-
-C:/Qt/Tools/CMake_64/share/cmake-3.30/Modules/CMakeDetermineCompilerSupport.cmake:
 
 C:/Qt/Tools/CMake_64/share/cmake-3.30/Modules/CMakeDetermineRCCompiler.cmake:
 
@@ -1326,15 +1350,3 @@ C:/langproject/src/Player.cpp:
 C:/langproject/src/Player.h:
 
 C:/langproject/src/main.cpp:
-
-C:/Qt/6.11.2/mingw_64/lib/cmake/Qt6Test/Qt6TestAdditionalTargetInfo.cmake:
-
-C:/Qt/6.11.2/mingw_64/lib/cmake/Qt6Test/Qt6TestConfig.cmake:
-
-C:/Qt/6.11.2/mingw_64/lib/cmake/Qt6Test/Qt6TestConfigVersion.cmake:
-
-C:/Qt/6.11.2/mingw_64/lib/cmake/Qt6Test/Qt6TestConfigVersionImpl.cmake:
-
-C:/Qt/6.11.2/mingw_64/lib/cmake/Qt6Test/Qt6TestTargets-relwithdebinfo.cmake:
-
-C:/Qt/6.11.2/mingw_64/lib/cmake/Qt6Test/QtTestProperties.cmake:

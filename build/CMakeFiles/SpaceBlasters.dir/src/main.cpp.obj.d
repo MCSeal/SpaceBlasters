@@ -439,4 +439,17 @@ CMakeFiles/SpaceBlasters.dir/src/main.cpp.obj: \
  C:/Qt/6.11.2/mingw_64/include/QtWidgets/qgraphicseffect.h \
  C:\langproject\src\Bullet.h C:\langproject\src\Enemy.h \
  C:\langproject\src\Planet.h C:\langproject\src\Effect.h \
- C:\langproject\src\Pickup.h C:\langproject\src\GameState.h
+ C:\langproject\src\Pickup.h C:\langproject\src\GameState.h \
+ C:\langproject\src\Starfield.h \
+ C:/Qt/6.11.2/mingw_64/include/QtWidgets/QGraphicsRectItem \
+ C:/Qt/6.11.2/mingw_64/include/QtCore/QRandomGenerator \
+ C:/Qt/6.11.2/mingw_64/include/QtCore/qrandom.h \
+ C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/random \
+ C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/random.h \
+ C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/x86_64-w64-mingw32/bits/opt_random.h \
+ C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/pmmintrin.h \
+ C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/emmintrin.h \
+ C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/xmmintrin.h \
+ C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/mmintrin.h \
+ C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/mwaitintrin.h \
+ C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/random.tcc

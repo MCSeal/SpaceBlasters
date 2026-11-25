@@ -10,6 +10,7 @@
 GameView::GameView(QGraphicsScene *scene, QGraphicsSimpleTextItem *scoreText)
 
     : QGraphicsView(scene), scoreText(scoreText) {
+    stars = std::make_unique<Starfield>(*scene);
     player = std::make_unique<Player>(*scene, held);
 
     // lives text top right, made here since only the view touches it
@@ -28,12 +29,32 @@ GameView::GameView(QGraphicsScene *scene, QGraphicsSimpleTextItem *scoreText)
     // tick() runs every time the timer goes off
     connect(&timer, &QTimer::timeout, this, [this] { tick(); });
     timer.start(16);
+
+    showOverlay("SPACE BLASTERS", {
+        QString("best: %1").arg(HighScore::best()),
+        "",
+        "press SPACE to start",
+        "arrows or A / D to move, SPACE to fire",
+        "P to pause"}, 215);
 }
 
 //keyboard input 
 // autorepeat check so holding a key doesnt spam events
 void GameView::keyPressEvent(QKeyEvent *e) {
     if (e->isAutoRepeat()) return;
+    // nothing else works until the game is started
+    if (mode == Mode::Title) {
+        if (e->key() == Qt::Key_Space) {
+            hideOverlay();
+            mode = Mode::Playing;
+            restart();
+        }
+        return;
+    }
+    if (e->key() == Qt::Key_P && !stopped()) {
+        togglePause();
+        return;
+    }
     // r only does anything once the game has ended
     if (e->key() == Qt::Key_R && over) {
         restart();
@@ -48,6 +69,11 @@ void GameView::keyReleaseEvent(QKeyEvent *e) {
 
 // everything that happens each frame, in order
 void GameView::tick() {
+    if (mode == Mode::Paused) return;
+    stars->update();
+    // the title screen only has the stars moving
+    if (mode == Mode::Title) return;
+
     // last life is gone, let the explosion play and then end the game
     if (dying > 0) {
         // a few more explosions around the ship, one every few ticks
@@ -374,12 +400,16 @@ void GameView::restart() {
     pickupCooldown = 600;
     enemyCooldown = 90;
     // end screen text is its own items, remove those too
-    scene()->removeItem(endText);
-    delete endText;
-    endText = nullptr;
-    scene()->removeItem(hintText);
-    delete hintText;
-    hintText = nullptr;
+    if (endText) {
+        scene()->removeItem(endText);
+        delete endText;
+        endText = nullptr;
+    }
+    if (hintText) {
+        scene()->removeItem(hintText);
+        delete hintText;
+        hintText = nullptr;
+    }
 
     // planets go back to dim, waves back to the first one
     for (auto &p : planets) p->reset();
@@ -395,4 +425,45 @@ void GameView::restart() {
 
     spawnEnemies();
     timer.start(16);
+}
+
+void GameView::togglePause() {
+    if (mode == Mode::Playing) {
+        mode = Mode::Paused;
+        showOverlay("PAUSED", {"press P to continue"}, 170);
+    } else {
+        mode = Mode::Playing;
+        hideOverlay();
+    }
+}
+
+// the cover and the text sit above everything else in the scene
+void GameView::showOverlay(const QString &title, const QStringList &lines, int dim) {
+    hideOverlay();
+    auto *cover = scene()->addRect(0, 0, 800, 600, Qt::NoPen, QColor(0, 0, 0, dim));
+    cover->setZValue(50);
+    overlay.push_back(cover);
+
+    auto addText = [this](const QString &text, int size, const QColor &colour, qreal y) {
+        auto *t = scene()->addSimpleText(text);
+        t->setFont(QFont("Consolas", size));
+        t->setBrush(colour);
+        t->setPos(400 - t->boundingRect().width() / 2, y);
+        t->setZValue(51);
+        overlay.push_back(t);
+    };
+    addText(title, 48, QColor("#58d1a9"), 190);
+    qreal y = 280;
+    for (const QString &line : lines) {
+        addText(line, 16, QColor("#5DCAA5"), y);
+        y += 30;
+    }
+}
+
+void GameView::hideOverlay() {
+    for (auto *item : overlay) {
+        scene()->removeItem(item);
+        delete item;
+    }
+    overlay.clear();
 }

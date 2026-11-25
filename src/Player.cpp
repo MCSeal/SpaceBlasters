@@ -17,16 +17,31 @@ void Player::update() {
     setPos(nx, y());
 
     if (cooldown > 0) --cooldown;
+
+    // flip the flame every 6 ticks
+    if (++flicker >= 6) {
+        flicker = 0;
+        frame ^= 1;
+        showFrame();
+    }
 }
 
 // one svg per health, 4 only comes from a wrench
 void Player::showLives(int n) {
     if (n >= 1 && n <= 4) {
-        setSprite(QString("assets/player-ship-%1.svg").arg(n));
+        shown = n;
+        showFrame();
     }
 }
 
+// the b files are the same ship with a bigger flame
+void Player::showFrame() {
+    setSprite(QString("assets/player-ship-%1%2.svg").arg(shown).arg(frame ? "b" : ""));
+}
+
 void Player::reset() {
+    frame = 0;
+    flicker = 0;
     showLives(3);
     setOpacity(1.0);
     speed = 5;

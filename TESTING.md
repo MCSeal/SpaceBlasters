@@ -36,8 +36,12 @@ In VS Code you can also use the CMake Tools "Run CTest" button.
 
 The HighScore tests write to a temporary folder, so your real `scores.csv` is not touched.
 
-If ctest says a DLL is missing on Windows, add the Qt `bin` folder (the one with `Qt6Core.dll`)
-to your PATH, or run `windeployqt` on the test exes. CMake 3.22 or newer adds the path for ctest itself.
+On Windows, a plain PowerShell window may not find the MinGW compiler, Qt DLLs or ctest. Add them
+to the PATH for that window first (adjust the Qt version if yours is different):
+
+    $env:PATH = "C:\Qt\Tools\mingw1310_64\bin;C:\Qt\6.11.2\mingw_64\bin;C:\Qt\Tools\CMake_64\bin;" + $env:PATH
+
+The VS Code Testing tab and the Run CTest button do this for you.
 
 ## Manual play-test checklist
 
@@ -69,4 +73,9 @@ Tester: __________  Date: __________  Build: __________
 | MT-19 | Open scores.csv next to the exe | one new line for each finished game | | |
 | MT-20 | Press R after game over | everything resets: score 0, lives 3, planets dim, speed back to normal | | |
 | MT-21 | Let the game run for 2 minutes | no crash, no slowdown, no leftover bullets or effects | | |
+| MT-23 | Start the game | title screen shows with the best score and the controls, stars drifting behind, nothing else moves | | |
+| MT-24 | On the title screen press P, an arrow, then SPACE | only SPACE does anything, game starts without firing a bullet | | |
+| MT-25 | Press P while playing, wait, press P again | PAUSED shows, everything freezes (stars too), resumes where it was | | |
+| MT-26 | Press P during the death explosions and on the end screen | nothing happens | | |
+| MT-27 | Watch the ship while flying | flame flickers, stars scroll at different speeds, nothing looks cut off | | |
 | MT-22 | Fresh clone, build following the README | builds and runs without extra steps | | |
